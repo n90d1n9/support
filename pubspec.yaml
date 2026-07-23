@@ -1,0 +1,19 @@
+name: support_domain
+description: Support Domain — centralized ERP case management platform.
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: ">=3.22.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.5.1
+  intl: ^0.19.0
+  http: ^1.2.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+flutter:
+  uses-material-design: true
