@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'providers/feature_providers.dart';
 import 'providers/notification_providers.dart';
 import 'providers/ticket_providers.dart';
+import 'providers/domain_providers.dart';
 import 'screens/app_shell.dart';
 import 'utils/support_theme.dart';
 
@@ -14,7 +15,7 @@ class SupportApp extends ConsumerWidget {
   const SupportApp({super.key});
   @override
   Widget build(BuildContext ctx, WidgetRef ref) => MaterialApp(
-      title: 'Support Domain',
+      title: ref.watch(activeDomainNameProvider),
       debugShowCheckedModeBanner: false,
       theme: buildSupportLightTheme(),
       darkTheme: buildSupportTheme(),
@@ -32,6 +33,11 @@ class _RootState extends ConsumerState<_Root> {
   @override
   void initState() {
     super.initState();
+    // Initialize with default ride support domain if not configured
+    final domain = ref.read(domainProvider);
+    if (domain == null) {
+      ref.read(domainProvider.notifier).loadFromPreset('domain-ride-support');
+    }
     ref.listenManual(ticketBoardProvider, (_, __) => _drain());
   }
 
