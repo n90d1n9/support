@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/feature_providers.dart';
+import '../providers/domain_providers.dart';
 import '../utils/support_theme.dart';
 import '../widgets/notification_bell.dart';
 import '../widgets/search_palette.dart';
@@ -51,6 +52,7 @@ class _AppShellState extends ConsumerState<AppShell> {
   @override
   Widget build(BuildContext ctx) {
     final tm = ref.watch(themeModeProvider);
+    final domainName = ref.watch(activeDomainNameProvider);
     final dark = tm == ThemeMode.dark ||
         (tm == ThemeMode.system &&
             MediaQuery.platformBrightnessOf(ctx) == Brightness.dark);
@@ -79,9 +81,9 @@ class _AppShellState extends ConsumerState<AppShell> {
                       child: const Icon(Icons.support_agent_rounded,
                           color: Colors.white, size: 17)),
                   const SizedBox(width: 10),
-                  const Text('Support Platform',
+                  Text(domainName,
                       style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 15))
+                          const TextStyle(fontWeight: FontWeight.w700, fontSize: 15))
                 ]),
                 actions: [
                   InkWell(
