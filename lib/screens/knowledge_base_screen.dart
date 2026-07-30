@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/knowledge_article.dart';
+import '../models/ticket.dart';
 import '../providers/ticket_providers.dart';
 import '../utils/support_theme.dart';
 
@@ -28,7 +28,7 @@ class KnowledgeBaseScreen extends ConsumerWidget {
           // Articles list
           Expanded(
             child:
-                _buildArticlesList(articles.cast<KnowledgeArticle>(), notifier),
+                _buildArticlesList(articles, notifier),
           ),
         ],
       ),
@@ -67,7 +67,7 @@ class KnowledgeBaseScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildArticlesList(List<KnowledgeArticle> articles, dynamic notifier) {
+  Widget _buildArticlesList(List<KbArticle> articles, dynamic notifier) {
     if (articles.isEmpty) {
       return _buildEmptyState();
     }
@@ -114,7 +114,7 @@ class KnowledgeBaseScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildArticleCard(KnowledgeArticle article, dynamic notifier) {
+  Widget _buildArticleCard(KbArticle article, dynamic notifier) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -160,7 +160,7 @@ class KnowledgeBaseScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildArticleHeader(KnowledgeArticle article, dynamic notifier) {
+  Widget _buildArticleHeader(KbArticle article, dynamic notifier) {
     return Row(
       children: [
         // Type badge
@@ -297,7 +297,7 @@ class KnowledgeBaseSearchDelegate extends SearchDelegate<String> {
           itemBuilder: (_, index) {
             final article = articles[index];
             return _buildSearchResultCard(
-                article as KnowledgeArticle, notifier);
+                article, notifier);
           },
         );
       },
@@ -400,7 +400,7 @@ class KnowledgeBaseSearchDelegate extends SearchDelegate<String> {
     );
   }
 
-  Widget _buildSearchResultCard(KnowledgeArticle article, dynamic notifier) {
+  Widget _buildSearchResultCard(KbArticle article, dynamic notifier) {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       color: SupportColors.surface,

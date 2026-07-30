@@ -1,4 +1,4 @@
-package com.example.support_domain
+package tech.kayys.salam
 
 import io.flutter.embedding.android.FlutterActivity
 

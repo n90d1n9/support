@@ -237,7 +237,7 @@ class _DomainSectionState extends ConsumerState<_DomainSection> {
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => _showCreateCustomDialog(ctx, ref),
+                  onPressed: () => _showCreateCustomDialog(ctx, ref, presets),
                   icon: const Icon(Icons.add_rounded, size: 16),
                   label: const Text('Custom Domain'),
                 ),
@@ -246,7 +246,8 @@ class _DomainSectionState extends ConsumerState<_DomainSection> {
               if (domain != null)
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () => _showManageCategoriesDialog(ctx, ref, domain),
+                    onPressed: () =>
+                        _showManageCategoriesDialog(ctx, ref, domain),
                     icon: const Icon(Icons.settings_rounded, size: 16),
                     label: const Text('Manage'),
                   ),
@@ -258,7 +259,7 @@ class _DomainSectionState extends ConsumerState<_DomainSection> {
     );
   }
 
-  void _showCreateCustomDialog(BuildContext ctx, WidgetRef ref) {
+  void _showCreateCustomDialog(BuildContext ctx, WidgetRef ref, presets) {
     showDialog(
       context: ctx,
       builder: (_) => AlertDialog(
@@ -266,17 +267,18 @@ class _DomainSectionState extends ConsumerState<_DomainSection> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Start with a preset and customize it, or create from scratch.'),
+            const Text(
+                'Start with a preset and customize it, or create from scratch.'),
             const SizedBox(height: 16),
             ...presets.map((preset) => ListTile(
-              leading: const Icon(Icons.template_rounded),
-              title: Text(preset.name),
-              subtitle: Text(preset.description),
-              onTap: () {
-                ref.read(domainProvider.notifier).setActiveDomain(preset);
-                Navigator.pop(ctx);
-              },
-            )),
+                  leading: const Icon(Icons.roundabout_left),
+                  title: Text(preset.name),
+                  subtitle: Text(preset.description),
+                  onTap: () {
+                    ref.read(domainProvider.notifier).setActiveDomain(preset);
+                    Navigator.pop(ctx);
+                  },
+                )),
           ],
         ),
         actions: [
@@ -289,7 +291,8 @@ class _DomainSectionState extends ConsumerState<_DomainSection> {
     );
   }
 
-  void _showManageCategoriesDialog(BuildContext ctx, WidgetRef ref, SupportDomain domain) {
+  void _showManageCategoriesDialog(
+      BuildContext ctx, WidgetRef ref, SupportDomain domain) {
     showDialog(
       context: ctx,
       builder: (_) => AlertDialog(
@@ -300,27 +303,36 @@ class _DomainSectionState extends ConsumerState<_DomainSection> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Categories', style: TextStyle(fontWeight: FontWeight.w700)),
+              const Text('Categories',
+                  style: TextStyle(fontWeight: FontWeight.w700)),
               const SizedBox(height: 8),
               ...domain.categories.map((c) => Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: Row(children: [
-                  Container(width: 10, height: 10, decoration: BoxDecoration(color: Color(int.parse(c.colorHex.replaceAll('#', '0x'))), shape: BoxShape.circle)),
-                  const SizedBox(width: 8),
-                  Text(c.name),
-                  if (c.isSafetyCritical) ...[
-                    const SizedBox(width: 6),
-                    const Icon(Icons.warning_rounded, size: 14, color: Colors.orange),
-                  ],
-                ]),
-              )),
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Row(children: [
+                      Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                              color: Color(
+                                  int.parse(c.colorHex.replaceAll('#', '0x'))),
+                              shape: BoxShape.circle)),
+                      const SizedBox(width: 8),
+                      Text(c.name),
+                      if (c.isSafetyCritical) ...[
+                        const SizedBox(width: 6),
+                        const Icon(Icons.warning_rounded,
+                            size: 14, color: Colors.orange),
+                      ],
+                    ]),
+                  )),
               const SizedBox(height: 16),
-              const Text('Teams', style: TextStyle(fontWeight: FontWeight.w700)),
+              const Text('Teams',
+                  style: TextStyle(fontWeight: FontWeight.w700)),
               const SizedBox(height: 8),
               ...domain.teams.map((t) => Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: Text(t.name),
-              )),
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Text(t.name),
+                  )),
             ],
           ),
         ),

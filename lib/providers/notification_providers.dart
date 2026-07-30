@@ -57,18 +57,21 @@ final _notifiedBreachesProvider = StateProvider<Set<String>>((_) => {});
 final slaBreachWatcherProvider = FutureProvider<void>((ref) async {
   final tickets = ref.watch(ticketBoardProvider);
   final now = ref.watch(clockProvider).value ?? DateTime.now();
-  final alerted = ref.watch(_notifiedBreachesProvider);
+  var alerted = ref.watch(_notifiedBreachesProvider);
   final notifier = ref.read(notificationProvider.notifier);
   final alertNotifier = ref.read(_notifiedBreachesProvider.notifier);
   for (final t in tickets) {
     if (t.status.isTerminal || alerted.contains(t.id)) continue;
     if (t.sla.isBreached(now)) {
-      notifier.add(
-          type: NotificationType.slaBreached,
-          message: '${t.ticketNumber} SLA breached — ${t.subject}',
-          ticketId: t.id,
-          ticketNumber: t.ticketNumber);
-      alertNotifier.state = {...alerted, t.id};
+      Future.microtask(() {
+        notifier.add(
+            type: NotificationType.slaBreached,
+            message: '${t.ticketNumber} SLA breached — ${t.subject}',
+            ticketId: t.id,
+            ticketNumber: t.ticketNumber);
+        alertNotifier.state = {...alertNotifier.state, t.id};
+      });
+      alerted = {...alerted, t.id};
     }
   }
 });
