@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../constants/app_constants.dart';
 import '../models/domain_config.dart';
 import '../../../widgets/salam_chip.dart';
 import '../providers/domain_providers.dart';
-import '../../../utils/app_theme.dart';
 import '../../settings/widgets/setting_card.dart';
 
 class DomainSection extends ConsumerStatefulWidget {

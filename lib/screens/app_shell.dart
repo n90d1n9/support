@@ -5,7 +5,7 @@ import '../constants/app_constants.dart';
 import '../features/domain/providers/domain_providers.dart';
 import '../features/settings/screens/settings_screen.dart';
 import '../providers/theme_provider.dart';
-import '../utils/app_theme.dart';
+import '../constants/app_constants.dart';
 import '../features/notification/widgets/notification_bell.dart';
 import '../widgets/search_palette.dart';
 import '../widgets/keyboard_shortcuts_overlay.dart';
@@ -32,13 +32,19 @@ class _NavDestination {
 /// List of navigation destinations in the app.
 const List<_NavDestination> _navDestinations = [
   _NavDestination(Icons.dashboard_outlined, Icons.dashboard_rounded, 'Tickets'),
-  _NavDestination(Icons.bar_chart_outlined, Icons.bar_chart_rounded, 'Analytics'),
-  _NavDestination(Icons.trending_up_outlined, Icons.trending_up_rounded, 'Escalations'),
+  _NavDestination(
+      Icons.bar_chart_outlined, Icons.bar_chart_rounded, 'Analytics'),
+  _NavDestination(
+      Icons.trending_up_outlined, Icons.trending_up_rounded, 'Escalations'),
   _NavDestination(Icons.shield_outlined, Icons.shield_rounded, 'Safety'),
-  _NavDestination(Icons.person_outline_rounded, Icons.person_rounded, 'My Work'),
-  _NavDestination(Icons.menu_book_outlined, Icons.menu_book_rounded, 'Knowledge'),
-  _NavDestination(Icons.search_off_rounded, Icons.search_rounded, 'Lost & Found'),
-  _NavDestination(Icons.account_circle_outlined, Icons.account_circle_rounded, 'Portal')
+  _NavDestination(
+      Icons.person_outline_rounded, Icons.person_rounded, 'My Work'),
+  _NavDestination(
+      Icons.menu_book_outlined, Icons.menu_book_rounded, 'Knowledge'),
+  _NavDestination(
+      Icons.search_off_rounded, Icons.search_rounded, 'Lost & Found'),
+  _NavDestination(
+      Icons.account_circle_outlined, Icons.account_circle_rounded, 'Portal')
 ];
 
 /// List of screen widgets corresponding to each navigation destination.
@@ -77,8 +83,8 @@ class _AppShellState extends ConsumerState<AppShell> {
 
   void _toggleTheme(bool isDark) {
     ref.read(themeModeProvider.notifier).setTheme(
-      isDark ? ThemeMode.light : ThemeMode.dark,
-    );
+          isDark ? ThemeMode.light : ThemeMode.dark,
+        );
   }
 
   @override
@@ -88,7 +94,8 @@ class _AppShellState extends ConsumerState<AppShell> {
     final isDarkMode = themeMode == ThemeMode.dark ||
         (themeMode == ThemeMode.system &&
             MediaQuery.platformBrightnessOf(context) == Brightness.dark);
-    final useRailLayout = MediaQuery.sizeOf(context).width >= LayoutMetrics.railBreakpoint;
+    final useRailLayout =
+        MediaQuery.sizeOf(context).width >= LayoutMetrics.railBreakpoint;
 
     return KeyboardShortcutsHandler(
       onNewTicket: () => showCreateTicketDialog(context, ref),
@@ -115,14 +122,14 @@ class _AppShellState extends ConsumerState<AppShell> {
                 ],
               )
             : IndexedStack(index: _currentIndex, children: _screens),
-        bottomNavigationBar: useRailLayout
-            ? null
-            : _buildBottomNavigationBar(context),
+        bottomNavigationBar:
+            useRailLayout ? null : _buildBottomNavigationBar(context),
       ),
     );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context, String domainName, bool isDarkMode) {
+  PreferredSizeWidget _buildAppBar(
+      BuildContext context, String domainName, bool isDarkMode) {
     return AppBar(
       backgroundColor: AppColors.bg,
       elevation: 0,

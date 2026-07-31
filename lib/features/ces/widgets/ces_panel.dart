@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/ces_provider.dart';
 import '../../ticket/models/ticket.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 
 class CesPanel extends ConsumerStatefulWidget {
   final Ticket ticket;

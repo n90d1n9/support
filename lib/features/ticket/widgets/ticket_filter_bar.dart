@@ -5,7 +5,7 @@ import '../models/ticket_category.dart';
 import '../models/ticket_priority.dart';
 import '../models/ticket_status.dart';
 import '../providers/ticket_providers.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 
 class TicketFilterBar extends ConsumerWidget {
   const TicketFilterBar({super.key});

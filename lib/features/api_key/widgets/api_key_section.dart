@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../providers/api_providers.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 import '../../settings/widgets/setting_card.dart';
 
 class ApiKeySection extends ConsumerStatefulWidget {

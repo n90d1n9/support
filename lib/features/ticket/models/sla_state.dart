@@ -11,7 +11,8 @@ class SlaState {
       {required this.createdAt,
       required this.priority,
       this.firstResponseAt,
-      this.resolvedAt});
+      this.resolvedAt,
+      required DateTime closedAt});
   DateTime get firstResponseDeadline =>
       createdAt.add(priority.firstResponseTarget);
   DateTime get resolutionDeadline => createdAt.add(priority.resolutionTarget);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../constants/app_constants.dart';
 import '../../ticket/models/ticket.dart';
 import '../../ticket/models/ticket_status.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
 import '../providers/agent_providers.dart';
-import '../../../utils/app_theme.dart';
 import '../../../widgets/badges.dart';
 import '../widgets/sla_timer.dart';
 import '../../ticket/screens/ticket_detail_screen.dart';

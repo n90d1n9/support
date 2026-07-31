@@ -4,7 +4,7 @@ class QuickReply {
   final String id;
   final String title;
   final String body;
-  final TicketCategory? category;
+  final List<TicketCategory> applicableCategories;
   final int useCount;
   final DateTime createdAt;
   final DateTime? lastUsedAt;
@@ -13,18 +13,18 @@ class QuickReply {
     required this.id,
     required this.title,
     required this.body,
-    this.category,
+    this.applicableCategories = const [],
     this.useCount = 0,
-    required this.createdAt,
+    DateTime? createdAt,
     this.lastUsedAt,
-  });
+  }) : createdAt = createdAt ?? DateTime.now();
 
   /// Create a copy with updated fields
   QuickReply copyWith({
     String? id,
     String? title,
     String? body,
-    TicketCategory? category,
+    List<TicketCategory>? applicableCategories,
     int? useCount,
     DateTime? createdAt,
     DateTime? lastUsedAt,
@@ -33,11 +33,17 @@ class QuickReply {
       id: id ?? this.id,
       title: title ?? this.title,
       body: body ?? this.body,
-      category: category ?? this.category,
+      applicableCategories: applicableCategories ?? this.applicableCategories,
       useCount: useCount ?? this.useCount,
       createdAt: createdAt ?? this.createdAt,
       lastUsedAt: lastUsedAt ?? this.lastUsedAt,
     );
+  }
+
+  /// Check if this reply is applicable to a category
+  bool isApplicableTo(TicketCategory category) {
+    return applicableCategories.isEmpty ||
+        applicableCategories.contains(category);
   }
 
   /// Convert to JSON for storage
@@ -46,7 +52,7 @@ class QuickReply {
       'id': id,
       'title': title,
       'body': body,
-      'category': category?.name,
+      'applicableCategories': applicableCategories.map((c) => c.name).toList(),
       'useCount': useCount,
       'createdAt': createdAt.toIso8601String(),
       'lastUsedAt': lastUsedAt?.toIso8601String(),
@@ -59,12 +65,13 @@ class QuickReply {
       id: json['id'] as String,
       title: json['title'] as String,
       body: json['body'] as String,
-      category: json['category'] != null
-          ? TicketCategory.values.firstWhere(
-              (e) => e.name == json['category'],
-              orElse: () => TicketCategory.rideIssue,
-            )
-          : null,
+      applicableCategories: (json['applicableCategories'] as List<dynamic>?)
+              ?.map((e) => TicketCategory.values.firstWhere(
+                    (category) => category.name == e,
+                    orElse: () => TicketCategory.rideIssue,
+                  ))
+              .toList() ??
+          const [],
       useCount: json['useCount'] as int? ?? 0,
       createdAt: DateTime.parse(json['createdAt'] as String),
       lastUsedAt: json['lastUsedAt'] != null
@@ -81,4 +88,8 @@ class QuickReply {
 
   @override
   int get hashCode => id.hashCode;
+
+  @override
+  String toString() =>
+      'QuickReply(id: $id, title: $title, useCount: $useCount)';
 }

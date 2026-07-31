@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../constants/app_constants.dart';
 import '../../analytics/providers/analytics_providers.dart';
 import '../providers/clock_provider.dart';
-import '../../../utils/app_theme.dart';
 import '../../../widgets/badges.dart';
 import '../widgets/sla_timer.dart';
 import '../../ticket/screens/ticket_detail_screen.dart';

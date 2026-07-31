@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../ticket/models/ticket.dart';
 import '../../../providers/api_providers.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 
 class ConversationSummaryCard extends ConsumerWidget {
   final Ticket ticket;

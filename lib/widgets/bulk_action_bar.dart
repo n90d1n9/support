@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../features/ticket/models/ticket_status.dart';
 import '../features/ticket/providers/ticket_board_provider.dart';
 import '../features/operation/providers/agent_providers.dart';
-import '../utils/app_theme.dart';
+import '../constants/app_constants.dart';
 
 class BulkActionBar extends ConsumerWidget {
   const BulkActionBar({super.key});

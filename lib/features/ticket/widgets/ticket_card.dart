@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../models/ticket.dart';
 import '../../operation/providers/agent_providers.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 import '../../../widgets/badges.dart';
 import '../../operation/widgets/sla_timer.dart';
 import '../../operation/widgets/sla_progress_bar.dart';

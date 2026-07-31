@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../../../constants/app_constants.dart';
 import '../../ticket/models/ticket_category.dart';
 import '../../ticket/models/ticket_status.dart';
 import '../models/customer.dart';
@@ -8,7 +9,7 @@ import '../../operation/models/message.dart';
 import '../../ticket/models/ticket.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
 import '../../ticket/providers/ticket_providers.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 import '../../../widgets/badges.dart';
 import '../../operation/widgets/sla_timer.dart';
 

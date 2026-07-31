@@ -6,7 +6,7 @@ import '../../template/models/template.dart';
 import '../models/ticket_category.dart';
 import '../models/ticket_priority.dart';
 import '../providers/ticket_board_provider.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 import '../../chat/widgets/chatbot_deflect_widget.dart';
 import '../../template/widgets/template_picker.dart';
 import 'duplicate_banner.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../sentiment/models/sentiment_level.dart';
 import '../../ticket/models/ticket.dart';
 import '../../../providers/api_providers.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 import '../../ticket/models/ticket_priority.dart';
 
 Color _sc(SentimentLevel s) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
+import '../../../constants/app_constants.dart';
 
 class SettingsCard extends StatelessWidget {
   final String title;

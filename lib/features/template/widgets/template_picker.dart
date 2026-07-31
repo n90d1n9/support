@@ -5,7 +5,7 @@ import '../../ticket/models/ticket_category.dart';
 import '../../ticket/models/ticket_priority.dart';
 import '../models/template.dart';
 import '../providers/template_provider.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 
 Future<TicketTemplate?> showTemplatePicker(BuildContext ctx) {
   return showModalBottomSheet<TicketTemplate>(

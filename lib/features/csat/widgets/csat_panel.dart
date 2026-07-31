@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../ticket/models/ticket.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 
 class CsatPanel extends ConsumerWidget {
   final Ticket ticket;

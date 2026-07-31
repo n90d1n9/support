@@ -8,7 +8,7 @@ import '../../ticket/providers/ticket_board_provider.dart';
 import '../../ticket/providers/ticket_providers.dart';
 import '../../operation/providers/agent_providers.dart';
 import '../../notification/providers/notification_providers.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 import '../services/show_quick_reply_picker.dart';
 
 class ConversationPanel extends ConsumerStatefulWidget {

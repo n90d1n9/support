@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../knowledge/models/kb_article.dart';
 import '../../knowledge/providers/knowledge_base_provider.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 
 class ChatbotDeflectStep extends ConsumerStatefulWidget {
   final VoidCallback onProceed;

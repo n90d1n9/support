@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../constants/app_constants.dart';
 import '../../team/models/agent.dart';
 import '../../team/models/support_team.dart';
 import '../../ticket/models/ticket.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
 import '../providers/agent_providers.dart';
-import '../../../utils/app_theme.dart';
 
 class AssignmentPanel extends ConsumerWidget {
   final Ticket ticket;

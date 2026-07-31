@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../ticket/models/ticket.dart';
 import '../../ticket/models/ticket_attachement.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 
 IconData _attIcon(AttachmentType t) {
   switch (t) {

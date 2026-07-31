@@ -7,7 +7,7 @@ import '../models/ticket.dart';
 import '../models/ticket_status.dart';
 import '../providers/ticket_board_provider.dart';
 import '../providers/ticket_providers.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 import '../../../widgets/badges.dart';
 import '../../operation/widgets/sla_timer.dart';
 import '../../operation/widgets/sla_progress_bar.dart';

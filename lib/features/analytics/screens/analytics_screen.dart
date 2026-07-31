@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import '../../team/models/support_team.dart';
 import '../../ticket/models/ticket_category.dart';
 import '../providers/analytics_providers.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 import '../../chart/widgets/mini_chart.dart';
 
 class AnalyticsScreen extends ConsumerWidget {

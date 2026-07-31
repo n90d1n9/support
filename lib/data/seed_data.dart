@@ -8,22 +8,19 @@ library;
 import 'dart:math';
 
 import '../../models/audit_entry.dart';
-import '../ai/models/ai_insight.dart';
-import '../csat/models/csat_feedback.dart';
-import '../customer/models/customer.dart';
-import '../operation/models/linked_entity_ref.dart';
-import '../refund/models/refund_request.dart';
-import '../sentiment/models/sentiment_level.dart';
-import '../team/models/support_team.dart';
 import '../../features/ticket/models/comm_channel.dart';
 import '../../features/ticket/models/sla_state.dart';
 import '../../features/ticket/models/ticket.dart';
-import '../../features/ticket/models/ticket_attachement.dart';
 import '../../features/ticket/models/ticket_category.dart';
 import '../../features/ticket/models/ticket_message.dart';
 import '../../features/ticket/models/ticket_priority.dart';
 import '../../features/ticket/models/ticket_status.dart';
-import '../../features/operation/models/workflow.dart';
+import '../features/ai/models/ai_insight.dart';
+import '../features/csat/models/csat_feedback.dart';
+import '../features/customer/models/customer.dart';
+import '../features/operation/models/linked_entity_ref.dart';
+import '../features/sentiment/models/sentiment_level.dart';
+import '../features/team/models/support_team.dart';
 
 /// Generates a unique ID with the given prefix.
 String generateId(String prefix) =>
@@ -81,8 +78,7 @@ List<Ticket> createSeedTickets() {
         assignedTeam: SupportTeam.rideOperations,
         linkedEntities: const [
           LinkedEntityRef(type: 'Ride', id: 'ride-9981', label: 'Ride #9981'),
-          LinkedEntityRef(
-              type: 'Driver', id: 'drv-055', label: 'Driver Ahmad')
+          LinkedEntityRef(type: 'Driver', id: 'drv-055', label: 'Driver Ahmad')
         ],
         messages: [
           msg(
@@ -174,8 +170,7 @@ List<Ticket> createSeedTickets() {
         createdAt: now.subtract(const Duration(hours: 2)),
         subject: 'Weekly payout missing — IDR 1.2M not received',
         linkedEntities: const [
-          LinkedEntityRef(
-              type: 'Payment', id: 'pay-5521', label: 'Payout W-22')
+          LinkedEntityRef(type: 'Payment', id: 'pay-5521', label: 'Payout W-22')
         ],
         messages: [
           msg('drv-110', 'Joko Prasetyo',
@@ -245,7 +240,8 @@ List<Ticket> createSeedTickets() {
             createdAt: now.subtract(const Duration(hours: 3)),
             priority: TicketPriority.normal,
             firstResponseAt:
-                now.subtract(const Duration(hours: 2, minutes: 50))),
+                now.subtract(const Duration(hours: 2, minutes: 50)),
+            closedAt: null),
         createdAt: now.subtract(const Duration(hours: 3)),
         subject: 'App crashes when opening ride history',
         assignedAgentId: 'agent-fajar',
@@ -282,7 +278,8 @@ List<Ticket> createSeedTickets() {
         sla: SlaState(
             createdAt: now.subtract(const Duration(hours: 1)),
             priority: TicketPriority.high,
-            firstResponseAt: now.subtract(const Duration(minutes: 55))),
+            firstResponseAt: now.subtract(const Duration(minutes: 55)),
+            closedAt: null),
         createdAt: now.subtract(const Duration(hours: 1)),
         subject: 'Unauthorized charge of IDR 500k on my account',
         assignedAgentId: 'agent-hana',
@@ -334,7 +331,8 @@ List<Ticket> createSeedTickets() {
             createdAt: now.subtract(const Duration(days: 2)),
             priority: TicketPriority.normal,
             firstResponseAt: now.subtract(const Duration(days: 2, hours: -2)),
-            resolvedAt: now.subtract(const Duration(hours: 6))),
+            resolvedAt: now.subtract(const Duration(hours: 6)),
+            closedAt: null),
         createdAt: now.subtract(const Duration(days: 2)),
         closedAt: now.subtract(const Duration(hours: 6)),
         subject: 'Invoice discrepancy — 12 extra rides billed in May',
@@ -402,6 +400,10 @@ List<Ticket> createSeedTickets() {
           ae(AuditAction.statusChanged, 'Citra', 'Resolved'),
           ae(AuditAction.closed, 'System', 'Auto-closed after 24h')
         ],
-        tags: const ['wallet', 'topup', 'resolved']),
+        tags: const [
+          'wallet',
+          'topup',
+          'resolved'
+        ]),
   ];
 }

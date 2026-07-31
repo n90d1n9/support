@@ -12,7 +12,8 @@ enum AuditAction {
   attachmentAdded,
   merged,
   csatRecorded,
-  aiSuggestionApplied
+  aiSuggestionApplied,
+  closed
 }
 
 @immutable

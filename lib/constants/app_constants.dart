@@ -4,6 +4,8 @@
 /// to improve maintainability and consistency across the codebase.
 library;
 
+import 'package:Salam/features/ticket/models/ticket_priority.dart';
+import 'package:Salam/features/ticket/models/ticket_status.dart';
 import 'package:flutter/material.dart';
 
 /// Color palette used throughout the application.
@@ -38,6 +40,10 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static Color statusColor(TicketStatus status) {}
+
+  static Color priorityColor(TicketPriority priority) {}
 }
 
 /// Layout constants.

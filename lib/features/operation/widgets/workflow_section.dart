@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/workflow.dart';
 import '../providers/workflow_providers.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 import '../../settings/widgets/setting_card.dart';
 
 class WorkflowSection extends ConsumerWidget {

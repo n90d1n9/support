@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../constants/app_constants.dart';
 import '../models/kb_article.dart';
 import '../providers/knowledge_base_provider.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 
 class KnowledgeBaseScreen extends ConsumerWidget {
   const KnowledgeBaseScreen({super.key});

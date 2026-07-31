@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_theme.dart';
+import '../constants/app_constants.dart';
 
 class SalamChip extends StatelessWidget {
   final String label;

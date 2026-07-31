@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/ticket.dart';
 import '../models/ticket_status.dart';
 import '../providers/ticket_board_provider.dart';
-import '../../../utils/app_theme.dart';
+import '../../../constants/app_constants.dart';
 
 void showMergeTicketDialog(BuildContext ctx, WidgetRef ref, Ticket ticket) {
   showDialog(

@@ -87,12 +87,13 @@ class TicketBoardNotifier extends StateNotifier<List<Ticket>> {
 
   void _update(String ticketId, Ticket Function(Ticket) transform) {
     state = [
-      for (final t in state) if (t.id == ticketId) transform(t) else t,
+      for (final t in state)
+        if (t.id == ticketId) transform(t) else t,
     ];
   }
 
-  Ticket _audit(
-      Ticket t, AuditAction action, String actorId, String actorName, String desc) {
+  Ticket _audit(Ticket t, AuditAction action, String actorId, String actorName,
+      String desc) {
     final entry = AuditEntry(
         id: generateId('A'),
         action: action,
@@ -102,6 +103,40 @@ class TicketBoardNotifier extends StateNotifier<List<Ticket>> {
         at: DateTime.now());
     return t.copyWith(auditTrail: [...t.auditTrail, entry]);
   }
+
+  void assignManually(String id, SupportTeam team, String name) {}
+
+  void autoAssign(String id) {}
+
+  void createTicket(
+      {required CustomerType customerType,
+      required String customerId,
+      required String customerName,
+      required TicketCategory category,
+      required String subject}) {}
+
+  void addMessage(String id,
+      {required String authorId,
+      required String authorName,
+      required bool isAgent,
+      required String body,
+      required bool isInternal,
+      required CommChannel channel}) {}
+
+  void recordCsat(String id, {required int score}) {}
+
+  void addAttachment(String id,
+      {required AttachmentType type, required String fileName}) {}
+
+  void addTag(String ticketId, String trim) {}
+
+  void removeTag(String id, String tag) {}
+
+  void escalate(String id) {}
+
+  void changeStatus(String id, TicketStatus resolved) {}
+
+  void setAiInsight(String id, AiInsight insight) {}
 }
 
 final ticketBoardProvider =

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../utils/app_theme.dart';
-import '../../operation/providers/quick_replay_provider.dart';
+import '../../../constants/app_constants.dart';
+import '../providers/quick_reply_provider.dart';
 import '../../team/quick_replay.dart';
 import '../../ticket/models/ticket_category.dart';
 
