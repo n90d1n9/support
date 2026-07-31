@@ -185,7 +185,8 @@ class AiInsightNotifier extends StateNotifier<Map<String, AiInsightState>> {
                     authorName: '_',
                     isAgent: false,
                     body: ticket.subject,
-                    sentAt: ticket.createdAt))
+                    sentAt: ticket.createdAt,
+                    isInternal: false))
             .body)
         .toLowerCase();
     final s = text.contains('unsafe') ||

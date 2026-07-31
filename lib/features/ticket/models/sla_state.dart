@@ -5,14 +5,14 @@ import 'ticket_priority.dart';
 @immutable
 class SlaState {
   final DateTime createdAt;
-  final DateTime? firstResponseAt, resolvedAt;
+  final DateTime? firstResponseAt, resolvedAt, closedAt;
   final TicketPriority priority;
   const SlaState(
       {required this.createdAt,
       required this.priority,
       this.firstResponseAt,
       this.resolvedAt,
-      required DateTime closedAt});
+      this.closedAt});
   DateTime get firstResponseDeadline =>
       createdAt.add(priority.firstResponseTarget);
   DateTime get resolutionDeadline => createdAt.add(priority.resolutionTarget);
@@ -22,12 +22,14 @@ class SlaState {
         now.isAfter(resolutionDeadline);
   }
 
-  SlaState copyWith({DateTime? firstResponseAt, DateTime? resolvedAt}) =>
+  SlaState copyWith(
+          {DateTime? firstResponseAt, DateTime? resolvedAt, DateTime? closedAt}) =>
       SlaState(
           createdAt: createdAt,
           priority: priority,
           firstResponseAt: firstResponseAt ?? this.firstResponseAt,
-          resolvedAt: resolvedAt ?? this.resolvedAt);
+          resolvedAt: resolvedAt ?? this.resolvedAt,
+          closedAt: closedAt ?? this.closedAt);
 
   /// Convert to JSON for storage
   Map<String, dynamic> toJson() {
@@ -36,6 +38,7 @@ class SlaState {
       'priority': priority.name,
       'firstResponseAt': firstResponseAt?.toIso8601String(),
       'resolvedAt': resolvedAt?.toIso8601String(),
+      'closedAt': closedAt?.toIso8601String(),
     };
   }
 
@@ -52,6 +55,9 @@ class SlaState {
           : null,
       resolvedAt: json['resolvedAt'] != null
           ? DateTime.parse(json['resolvedAt'] as String)
+          : null,
+      closedAt: json['closedAt'] != null
+          ? DateTime.parse(json['closedAt'] as String)
           : null,
     );
   }
