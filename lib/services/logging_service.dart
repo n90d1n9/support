@@ -52,11 +52,6 @@ class TicketLogger {
     printer: PrettyPrinter(
       colors: true,
       printEmojis: true,
-      levelColors: {
-        Level.info: AnsiColor.fg(AnsiColor.blue),
-        Level.warning: AnsiColor.fg(AnsiColor.yellow),
-        Level.error: AnsiColor.fg(AnsiColor.red),
-      },
     ),
   );
 

@@ -485,6 +485,8 @@ class _PortalCardState extends ConsumerState<_PortalCard> {
                     authorName: _customerName,
                     isAgent: false,
                     body: replyText,
+                    channel: CommChannel.inAppChat,
+                    isInternal: false,
                   );
 
               _replyController.clear();

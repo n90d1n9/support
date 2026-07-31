@@ -76,7 +76,8 @@ class _DialogState extends ConsumerState<_Dialog> {
           authorName: 'System',
           isAgent: true,
           body: _tpl!.resolveMessage(buildContext(t, agentName: 'Agent')),
-          channel: CommChannel.inAppChat);
+          channel: CommChannel.inAppChat,
+          isInternal: false);
     }
     Navigator.pop(context);
   }
