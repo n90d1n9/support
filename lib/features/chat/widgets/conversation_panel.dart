@@ -168,57 +168,9 @@ class _ConversationPanelState extends ConsumerState<ConversationPanel>
   }
 
   IconData _chIcon(CommChannel ch) {
-    switch (ch) {
-      case CommChannel.inAppChat:
-        return Icons.chat_bubble_outline_rounded;
-      case CommChannel.email:
-        return Icons.email_outlined;
-      case CommChannel.whatsApp:
-        return Icons.phone_android_rounded;
-      case CommChannel.phone:
-        return Icons.call_outlined;
-      case CommChannel.internalNote:
-        return Icons.lock_outline;
-      case CommChannel.sms:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.facebookMessenger:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.twitter:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.telegram:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.line:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.weChat:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.viber:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.skype:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.slack:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.microsoftTeams:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.webChat:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.voiceCall:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-      case CommChannel.videoCall:
-        // TODO: Handle this case.
-        throw UnimplementedError();
-    }
+    // Use the centralized icon definition from CommChannel extension
+    // This ensures consistency across the app and avoids duplicate switch statements
+    return ch.icon;
   }
 
   @override
