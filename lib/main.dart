@@ -38,7 +38,7 @@ class _Root extends ConsumerStatefulWidget {
 }
 
 class _RootState extends ConsumerState<_Root> {
-  ListenerSubscription? _ticketListener;
+  Subscription? _ticketListener;
 
   @override
   void initState() {
