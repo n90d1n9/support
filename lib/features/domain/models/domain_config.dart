@@ -47,6 +47,7 @@ class SupportDomain {
     );
   }
 
+  /// Get category by ID
   CategoryDefinition? getCategoryById(String id) {
     try {
       return categories.firstWhere((c) => c.id == id);
@@ -55,6 +56,7 @@ class SupportDomain {
     }
   }
 
+  /// Get team by ID
   TeamDefinition? getTeamById(String id) {
     try {
       return teams.firstWhere((t) => t.id == id);
@@ -63,6 +65,7 @@ class SupportDomain {
     }
   }
 
+  /// Get customer type by ID
   CustomerTypeDefinition? getCustomerTypeById(String id) {
     try {
       return customerTypes.firstWhere((c) => c.id == id);
@@ -70,6 +73,153 @@ class SupportDomain {
       return null;
     }
   }
+
+  /// Get category by name (case-insensitive)
+  CategoryDefinition? getCategoryByName(String name) {
+    try {
+      return categories.firstWhere(
+        (c) => c.name.toLowerCase() == name.toLowerCase(),
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Get team by name (case-insensitive)
+  TeamDefinition? getTeamByName(String name) {
+    try {
+      return teams.firstWhere(
+        (t) => t.name.toLowerCase() == name.toLowerCase(),
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Get customer type by name (case-insensitive)
+  CustomerTypeDefinition? getCustomerTypeByName(String name) {
+    try {
+      return customerTypes.firstWhere(
+        (c) => c.name.toLowerCase() == name.toLowerCase(),
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Get safety-critical categories
+  List<CategoryDefinition> get safetyCriticalCategories =>
+      categories.where((c) => c.isSafetyCritical).toList();
+
+  /// Validate domain configuration
+  DomainValidationResult validate() {
+    final errors = <String>[];
+    final warnings = <String>[];
+
+    // Check for duplicate IDs
+    final categoryIds = categories.map((c) => c.id).toList();
+    if (categoryIds.length != categoryIds.toSet().length) {
+      errors.add('Duplicate category IDs detected');
+    }
+
+    final teamIds = teams.map((t) => t.id).toList();
+    if (teamIds.length != teamIds.toSet().length) {
+      errors.add('Duplicate team IDs detected');
+    }
+
+    final customerTypeIds = customerTypes.map((c) => c.id).toList();
+    if (customerTypeIds.length != customerTypeIds.toSet().length) {
+      errors.add('Duplicate customer type IDs detected');
+    }
+
+    // Check for empty names
+    for (final cat in categories) {
+      if (cat.name.trim().isEmpty) {
+        errors.add('Category ${cat.id} has empty name');
+      }
+    }
+
+    for (final team in teams) {
+      if (team.name.trim().isEmpty) {
+        errors.add('Team ${team.id} has empty name');
+      }
+    }
+
+    for (final cust in customerTypes) {
+      if (cust.name.trim().isEmpty) {
+        errors.add('Customer type ${cust.id} has empty name');
+      }
+    }
+
+    // Warnings
+    if (categories.isEmpty) {
+      warnings.add('No categories defined');
+    }
+
+    if (teams.isEmpty) {
+      warnings.add('No teams defined');
+    }
+
+    if (customerTypes.isEmpty) {
+      warnings.add('No customer types defined');
+    }
+
+    if (safetyCriticalCategories.isEmpty) {
+      warnings.add('No safety-critical categories defined');
+    }
+
+    return DomainValidationResult(errors: errors, warnings: warnings);
+  }
+
+  /// Convert to JSON for serialization
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'categories': categories.map((c) => c.toJson()).toList(),
+      'teams': teams.map((t) => t.toJson()).toList(),
+      'customerTypes': customerTypes.map((c) => c.toJson()).toList(),
+      'metadata': metadata,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
+  /// Create from JSON
+  factory SupportDomain.fromJson(Map<String, dynamic> json) {
+    return SupportDomain(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String,
+      categories: (json['categories'] as List?)
+              ?.map((e) => CategoryDefinition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      teams: (json['teams'] as List?)
+              ?.map((e) => TeamDefinition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      customerTypes: (json['customerTypes'] as List?)
+              ?.map((e) =>
+                  CustomerTypeDefinition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      metadata: Map<String, String>.from(json['metadata'] ?? {}),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+    );
+  }
+}
+
+/// Validation result for domain configuration
+class DomainValidationResult {
+  final List<String> errors;
+  final List<String> warnings;
+
+  const DomainValidationResult({required this.errors, required this.warnings});
+
+  bool get isValid => errors.isEmpty;
 }
 
 /// A configurable category definition
@@ -111,6 +261,32 @@ class CategoryDefinition {
       metadata: metadata ?? this.metadata,
     );
   }
+
+  /// Convert to JSON for serialization
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'colorHex': colorHex,
+      'isSafetyCritical': isSafetyCritical,
+      'sortOrder': sortOrder,
+      'metadata': metadata,
+    };
+  }
+
+  /// Create from JSON
+  factory CategoryDefinition.fromJson(Map<String, dynamic> json) {
+    return CategoryDefinition(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String? ?? '',
+      colorHex: json['colorHex'] as String? ?? '#6C8CFF',
+      isSafetyCritical: json['isSafetyCritical'] as bool? ?? false,
+      sortOrder: json['sortOrder'] as int? ?? 0,
+      metadata: Map<String, String>.from(json['metadata'] ?? {}),
+    );
+  }
 }
 
 /// A configurable team definition
@@ -148,6 +324,30 @@ class TeamDefinition {
       metadata: metadata ?? this.metadata,
     );
   }
+
+  /// Convert to JSON for serialization
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'colorHex': colorHex,
+      'sortOrder': sortOrder,
+      'metadata': metadata,
+    };
+  }
+
+  /// Create from JSON
+  factory TeamDefinition.fromJson(Map<String, dynamic> json) {
+    return TeamDefinition(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String? ?? '',
+      colorHex: json['colorHex'] as String? ?? '#4F6EF7',
+      sortOrder: json['sortOrder'] as int? ?? 0,
+      metadata: Map<String, String>.from(json['metadata'] ?? {}),
+    );
+  }
 }
 
 /// A configurable customer type definition
@@ -183,6 +383,30 @@ class CustomerTypeDefinition {
       iconCodePoint: iconCodePoint ?? this.iconCodePoint,
       sortOrder: sortOrder ?? this.sortOrder,
       metadata: metadata ?? this.metadata,
+    );
+  }
+
+  /// Convert to JSON for serialization
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'iconCodePoint': iconCodePoint,
+      'sortOrder': sortOrder,
+      'metadata': metadata,
+    };
+  }
+
+  /// Create from JSON
+  factory CustomerTypeDefinition.fromJson(Map<String, dynamic> json) {
+    return CustomerTypeDefinition(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String? ?? '',
+      iconCodePoint: json['iconCodePoint'] as String? ?? '',
+      sortOrder: json['sortOrder'] as int? ?? 0,
+      metadata: Map<String, String>.from(json['metadata'] ?? {}),
     );
   }
 }
