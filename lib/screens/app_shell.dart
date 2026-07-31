@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/feature_providers.dart';
-import '../providers/domain_providers.dart';
-import '../utils/support_theme.dart';
-import '../widgets/notification_bell.dart';
+import '../features/domain/providers/domain_providers.dart';
+import '../features/settings/screens/settings_screen.dart';
+import '../providers/theme_provider.dart';
+import '../utils/app_theme.dart';
+import '../features/notification/widgets/notification_bell.dart';
 import '../widgets/search_palette.dart';
 import '../widgets/keyboard_shortcuts_overlay.dart';
-import '../widgets/create_ticket_dialog.dart';
-import 'support_dashboard_screen.dart';
-import 'analytics_screen.dart';
-import 'safety_screen.dart';
-import 'escalation_queue_screen.dart';
-import 'agent_workspace_screen.dart';
-import 'knowledge_base_screen.dart';
-import 'lost_found_screen.dart';
-import 'customer_portal_screen.dart';
-import 'settings_screen.dart';
-import 'ticket_detail_screen.dart';
+import '../features/ticket/widgets/create_ticket_dialog.dart';
+import '../features/dashboard/screens/support_dashboard_screen.dart';
+import '../features/analytics/screens/analytics_screen.dart';
+import '../features/operation/screens/safety_screen.dart';
+import '../features/operation/screens/escalation_queue_screen.dart';
+import '../features/operation/screens/agent_workspace_screen.dart';
+import '../features/knowledge/screens/knowledge_base_screen.dart';
+import '../features/lost_found/screens/lost_found_screen.dart';
+import '../features/customer/screens/customer_portal_screen.dart';
+import '../features/ticket/screens/ticket_detail_screen.dart';
 
 const _dests = [
   _D(Icons.dashboard_outlined, Icons.dashboard_rounded, 'Tickets'),
@@ -64,9 +64,9 @@ class _AppShellState extends ConsumerState<AppShell> {
           if (i < _screens.length) setState(() => _idx = i);
         },
         child: Scaffold(
-            backgroundColor: SupportColors.bg,
+            backgroundColor: AppColors.bg,
             appBar: AppBar(
-                backgroundColor: SupportColors.bg,
+                backgroundColor: AppColors.bg,
                 elevation: 0,
                 title: Row(children: [
                   Container(
@@ -82,8 +82,8 @@ class _AppShellState extends ConsumerState<AppShell> {
                           color: Colors.white, size: 17)),
                   const SizedBox(width: 10),
                   Text(domainName,
-                      style:
-                          const TextStyle(fontWeight: FontWeight.w700, fontSize: 15))
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w700, fontSize: 15))
                 ]),
                 actions: [
                   InkWell(
@@ -95,22 +95,22 @@ class _AppShellState extends ConsumerState<AppShell> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
-                              color: SupportColors.surfaceAlt,
+                              color: AppColors.surfaceAlt,
                               borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: SupportColors.border)),
+                              border: Border.all(color: AppColors.border)),
                           child: const Row(children: [
                             Icon(Icons.search_rounded,
-                                size: 15, color: SupportColors.textSecondary),
+                                size: 15, color: AppColors.textSecondary),
                             SizedBox(width: 6),
                             Text('Search…',
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: SupportColors.textSecondary)),
+                                    color: AppColors.textSecondary)),
                             SizedBox(width: 10),
                             Text('⌘K',
                                 style: TextStyle(
                                     fontSize: 10,
-                                    color: SupportColors.textSecondary,
+                                    color: AppColors.textSecondary,
                                     fontWeight: FontWeight.w600))
                           ]))),
                   const SizedBox(width: 4),
@@ -140,19 +140,19 @@ class _AppShellState extends ConsumerState<AppShell> {
                     NavigationRail(
                         selectedIndex: _idx,
                         onDestinationSelected: (i) => setState(() => _idx = i),
-                        backgroundColor: SupportColors.surface,
+                        backgroundColor: AppColors.surface,
                         indicatorColor:
-                            SupportColors.accent.withValues(alpha: 0.18),
+                            AppColors.accent.withValues(alpha: 0.18),
                         selectedIconTheme:
-                            const IconThemeData(color: SupportColors.accent),
+                            const IconThemeData(color: AppColors.accent),
                         selectedLabelTextStyle: const TextStyle(
-                            color: SupportColors.accent,
+                            color: AppColors.accent,
                             fontWeight: FontWeight.w700,
                             fontSize: 11),
                         unselectedLabelTextStyle: const TextStyle(
-                            color: SupportColors.textSecondary, fontSize: 11),
-                        unselectedIconTheme: const IconThemeData(
-                            color: SupportColors.textSecondary),
+                            color: AppColors.textSecondary, fontSize: 11),
+                        unselectedIconTheme:
+                            const IconThemeData(color: AppColors.textSecondary),
                         labelType: NavigationRailLabelType.all,
                         destinations: _dests
                             .map((d) => NavigationRailDestination(
@@ -170,16 +170,14 @@ class _AppShellState extends ConsumerState<AppShell> {
                 : NavigationBar(
                     selectedIndex: _idx,
                     onDestinationSelected: (i) => setState(() => _idx = i),
-                    backgroundColor: SupportColors.surface,
-                    indicatorColor:
-                        SupportColors.accent.withValues(alpha: 0.18),
+                    backgroundColor: AppColors.surface,
+                    indicatorColor: AppColors.accent.withValues(alpha: 0.18),
                     labelBehavior:
                         NavigationDestinationLabelBehavior.onlyShowSelected,
                     destinations: _dests
                         .map((d) => NavigationDestination(
                             icon: Icon(d.i),
-                            selectedIcon:
-                                Icon(d.si, color: SupportColors.accent),
+                            selectedIcon: Icon(d.si, color: AppColors.accent),
                             label: d.l))
                         .toList())));
   }

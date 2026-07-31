@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/ticket.dart';
-import '../providers/ticket_providers.dart';
-import '../providers/agent_providers.dart';
-import '../utils/support_theme.dart';
+import '../features/ticket/models/ticket.dart';
+import '../features/ticket/providers/ticket_board_provider.dart';
+import '../features/operation/providers/agent_providers.dart';
+import '../utils/app_theme.dart';
 
 class BulkActionBar extends ConsumerWidget {
   const BulkActionBar({super.key});
@@ -24,8 +24,8 @@ class BulkActionBar extends ConsumerWidget {
                 label:
                     const Text('Bulk select', style: TextStyle(fontSize: 12.5)),
                 style: OutlinedButton.styleFrom(
-                    foregroundColor: SupportColors.textSecondary,
-                    side: const BorderSide(color: SupportColors.border),
+                    foregroundColor: AppColors.textSecondary,
+                    side: const BorderSide(color: AppColors.border),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     minimumSize: Size.zero,
@@ -36,14 +36,13 @@ class BulkActionBar extends ConsumerWidget {
         margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-            color: SupportColors.accent.withValues(alpha: 0.12),
+            color: AppColors.accent.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(12),
-            border:
-                Border.all(color: SupportColors.accent.withValues(alpha: 0.4))),
+            border: Border.all(color: AppColors.accent.withValues(alpha: 0.4))),
         child: Row(children: [
           Text('${sel.length} selected',
               style: const TextStyle(
-                  color: SupportColors.accent,
+                  color: AppColors.accent,
                   fontWeight: FontWeight.w700,
                   fontSize: 13)),
           const SizedBox(width: 12),
@@ -61,7 +60,7 @@ class BulkActionBar extends ConsumerWidget {
           const Spacer(),
           IconButton(
               icon: const Icon(Icons.close_rounded,
-                  size: 18, color: SupportColors.accent),
+                  size: 18, color: AppColors.accent),
               onPressed: () => sn.state = {},
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 28, minHeight: 28))

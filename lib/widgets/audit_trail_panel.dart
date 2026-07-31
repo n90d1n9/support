@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/ticket.dart';
-import '../utils/support_theme.dart';
+import '../models/audit_entry.dart';
+import '../utils/app_theme.dart';
 
 IconData _icon(AuditAction a) {
   switch (a) {
@@ -38,7 +38,7 @@ class AuditTrailPanel extends StatelessWidget {
   Widget build(BuildContext ctx) {
     if (entries.isEmpty) {
       return const Text('No audit history',
-          style: TextStyle(color: SupportColors.textSecondary, fontSize: 12.5));
+          style: TextStyle(color: AppColors.textSecondary, fontSize: 12.5));
     }
     final sorted = [...entries]..sort((a, b) => b.at.compareTo(a.at));
     final fmt = DateFormat('MMM d, HH:mm:ss');
@@ -52,13 +52,13 @@ class AuditTrailPanel extends StatelessWidget {
                     width: 26,
                     height: 26,
                     decoration: BoxDecoration(
-                        color: SupportColors.surfaceAlt,
+                        color: AppColors.surfaceAlt,
                         shape: BoxShape.circle,
-                        border: Border.all(color: SupportColors.border)),
+                        border: Border.all(color: AppColors.border)),
                     child: Icon(_icon(sorted[i].action),
-                        size: 13, color: SupportColors.accent)),
+                        size: 13, color: AppColors.accent)),
                 if (i != sorted.length - 1)
-                  Container(width: 1.5, height: 28, color: SupportColors.border)
+                  Container(width: 1.5, height: 28, color: AppColors.border)
               ]),
               const SizedBox(width: 10),
               Expanded(
@@ -76,7 +76,7 @@ class AuditTrailPanel extends StatelessWidget {
                                 '${sorted[i].actorName} · ${fmt.format(sorted[i].at)}',
                                 style: const TextStyle(
                                     fontSize: 11,
-                                    color: SupportColors.textSecondary))
+                                    color: AppColors.textSecondary))
                           ])))
             ]))
     ]);

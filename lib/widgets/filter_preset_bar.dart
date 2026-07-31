@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/preset.dart';
-import '../models/ticket.dart';
-import '../providers/feature_providers.dart';
-import '../providers/ticket_providers.dart';
-import '../utils/support_theme.dart';
+import '../features/operation/models/preset.dart';
+import '../features/ticket/providers/ticket_providers.dart';
+import '../features/operation/providers/filter_provider.dart';
+import '../utils/app_theme.dart';
 
 class FilterPresetBar extends ConsumerWidget {
   const FilterPresetBar({super.key});
@@ -27,7 +26,7 @@ class FilterPresetBar extends ConsumerWidget {
     return SizedBox(
         height: 34,
         child: ListView(scrollDirection: Axis.horizontal, children: [
-          _Chip(
+          SalamChip2(
               label: 'All',
               active: activeId == null,
               onTap: () {
@@ -38,7 +37,7 @@ class FilterPresetBar extends ConsumerWidget {
           const SizedBox(width: 6),
           ...presets.map((p) => Padding(
               padding: const EdgeInsets.only(right: 6),
-              child: _Chip(
+              child: SalamChip2(
                   label: p.name,
                   active: activeId == p.id,
                   onTap: () => apply(p),
@@ -64,13 +63,14 @@ class FilterPresetBar extends ConsumerWidget {
   }
 }
 
-class _Chip extends StatelessWidget {
+class SalamChip2 extends StatelessWidget {
   final String label;
   final bool active;
   final VoidCallback onTap;
   final VoidCallback? onDelete;
-  const _Chip(
-      {required this.label,
+  const SalamChip2(
+      {super.key,
+      required this.label,
       required this.active,
       required this.onTap,
       required this.onDelete});
@@ -83,29 +83,27 @@ class _Chip extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(10, 0, onDelete != null ? 4 : 10, 0),
           decoration: BoxDecoration(
               color: active
-                  ? SupportColors.accent.withValues(alpha: 0.18)
-                  : SupportColors.surfaceAlt,
+                  ? AppColors.accent.withValues(alpha: 0.18)
+                  : AppColors.surfaceAlt,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                  color: active ? SupportColors.accent : SupportColors.border,
+                  color: active ? AppColors.accent : AppColors.border,
                   width: active ? 1.5 : 1)),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
             Text(label,
                 style: TextStyle(
                     fontSize: 12.5,
                     fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-                    color: active
-                        ? SupportColors.accent
-                        : SupportColors.textSecondary)),
+                    color:
+                        active ? AppColors.accent : AppColors.textSecondary)),
             if (onDelete != null) ...[
               const SizedBox(width: 3),
               GestureDetector(
                   onTap: onDelete,
                   child: Icon(Icons.close_rounded,
                       size: 13,
-                      color: active
-                          ? SupportColors.accent
-                          : SupportColors.textSecondary))
+                      color:
+                          active ? AppColors.accent : AppColors.textSecondary))
             ]
           ])));
 }
@@ -140,19 +138,17 @@ class _SaveBtnState extends State<_SaveBtn> {
                 decoration: InputDecoration(
                     hintText: 'Preset name…',
                     hintStyle: const TextStyle(
-                        fontSize: 12, color: SupportColors.textSecondary),
+                        fontSize: 12, color: AppColors.textSecondary),
                     contentPadding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     filled: true,
-                    fillColor: SupportColors.surfaceAlt,
+                    fillColor: AppColors.surfaceAlt,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide:
-                            const BorderSide(color: SupportColors.accent)),
+                        borderSide: const BorderSide(color: AppColors.accent)),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide:
-                            const BorderSide(color: SupportColors.accent))),
+                        borderSide: const BorderSide(color: AppColors.accent))),
                 onSubmitted: (v) {
                   if (v.trim().isNotEmpty) widget.onSave(v.trim());
                   setState(() => _e = false);
@@ -162,7 +158,7 @@ class _SaveBtnState extends State<_SaveBtn> {
         GestureDetector(
             onTap: () => setState(() => _e = false),
             child: const Icon(Icons.close_rounded,
-                size: 15, color: SupportColors.textSecondary))
+                size: 15, color: AppColors.textSecondary))
       ]);
     }
     return InkWell(
@@ -171,16 +167,16 @@ class _SaveBtnState extends State<_SaveBtn> {
         child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 9),
             decoration: BoxDecoration(
-                color: SupportColors.surfaceAlt,
+                color: AppColors.surfaceAlt,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: SupportColors.border)),
+                border: Border.all(color: AppColors.border)),
             child: const Row(mainAxisSize: MainAxisSize.min, children: [
               Icon(Icons.bookmark_add_outlined,
-                  size: 14, color: SupportColors.textSecondary),
+                  size: 14, color: AppColors.textSecondary),
               SizedBox(width: 5),
               Text('Save',
-                  style: TextStyle(
-                      fontSize: 12, color: SupportColors.textSecondary))
+                  style:
+                      TextStyle(fontSize: 12, color: AppColors.textSecondary))
             ])));
   }
 }

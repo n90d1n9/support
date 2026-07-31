@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../utils/support_theme.dart';
+import '../utils/app_theme.dart';
 
 class KeyboardShortcutsHandler extends ConsumerStatefulWidget {
   final Widget child;
@@ -92,9 +92,9 @@ class _HelpDialog extends StatelessWidget {
           width: 440,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-              color: SupportColors.surface,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: SupportColors.border),
+              border: Border.all(color: AppColors.border),
               boxShadow: [
                 BoxShadow(
                     color: Colors.black.withValues(alpha: 0.35), blurRadius: 40)
@@ -134,7 +134,7 @@ class _HelpDialog extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
-                              color: SupportColors.textSecondary,
+                              color: AppColors.textSecondary,
                               letterSpacing: .05)),
                       const SizedBox(height: 6),
                       ...(g[1] as List<String>).map((s) {
@@ -146,10 +146,10 @@ class _HelpDialog extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 4),
                                   decoration: BoxDecoration(
-                                      color: SupportColors.surfaceAlt,
+                                      color: AppColors.surfaceAlt,
                                       borderRadius: BorderRadius.circular(6),
-                                      border: Border.all(
-                                          color: SupportColors.border),
+                                      border:
+                                          Border.all(color: AppColors.border),
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.black
@@ -165,7 +165,7 @@ class _HelpDialog extends StatelessWidget {
                               Text(p[1],
                                   style: const TextStyle(
                                       fontSize: 13,
-                                      color: SupportColors.textPrimary))
+                                      color: AppColors.textPrimary))
                             ]));
                       }),
                       const SizedBox(height: 12)
@@ -187,17 +187,17 @@ class ShortcutsHelpButton extends StatelessWidget {
           child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
               decoration: BoxDecoration(
-                  color: SupportColors.surfaceAlt,
+                  color: AppColors.surfaceAlt,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: SupportColors.border)),
+                  border: Border.all(color: AppColors.border)),
               child: const Row(mainAxisSize: MainAxisSize.min, children: [
                 Icon(Icons.keyboard_rounded,
-                    size: 13, color: SupportColors.textSecondary),
+                    size: 13, color: AppColors.textSecondary),
                 SizedBox(width: 4),
                 Text('?',
                     style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
-                        color: SupportColors.textSecondary))
+                        color: AppColors.textSecondary))
               ]))));
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/ticket.dart';
-import '../utils/support_theme.dart';
+import '../features/operation/models/linked_entity_ref.dart';
+import '../utils/app_theme.dart';
 
 IconData _icon(String t) {
   switch (t) {
@@ -35,7 +35,7 @@ class LinkedEntitiesPanel extends StatelessWidget {
   Widget build(BuildContext ctx) {
     if (entities.isEmpty) {
       return const Text('No linked entities',
-          style: TextStyle(color: SupportColors.textSecondary, fontSize: 12.5));
+          style: TextStyle(color: AppColors.textSecondary, fontSize: 12.5));
     }
     return Wrap(
         spacing: 8,
@@ -48,12 +48,11 @@ class LinkedEntitiesPanel extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                     decoration: BoxDecoration(
-                        color: SupportColors.surfaceAlt,
+                        color: AppColors.surfaceAlt,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: SupportColors.border)),
+                        border: Border.all(color: AppColors.border)),
                     child: Row(mainAxisSize: MainAxisSize.min, children: [
-                      Icon(_icon(e.type),
-                          size: 14, color: SupportColors.accent),
+                      Icon(_icon(e.type), size: 14, color: AppColors.accent),
                       const SizedBox(width: 6),
                       Text(e.label ?? '${e.type} · ${e.id}',
                           style: const TextStyle(

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'providers/feature_providers.dart';
-import 'providers/notification_providers.dart';
-import 'providers/ticket_providers.dart';
-import 'providers/domain_providers.dart';
+import 'features/notification/providers/notification_providers.dart';
+import 'features/ticket/providers/ticket_board_provider.dart';
+import 'features/domain/providers/domain_providers.dart';
+import 'features/operation/providers/reminder_provider.dart';
+import 'providers/theme_provider.dart';
 import 'screens/app_shell.dart';
-import 'utils/support_theme.dart';
+import 'utils/app_theme.dart';
 
 void main() {
   runApp(const ProviderScope(child: SupportApp()));

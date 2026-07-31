@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/ticket.dart';
-import '../providers/agent_providers.dart';
-import '../utils/support_theme.dart';
+import '../features/ticket/models/ticket.dart';
+import '../features/operation/providers/agent_providers.dart';
+import '../utils/app_theme.dart';
 
 // ============================================
 // QUICK REPLY PICKER - Entry Point
@@ -45,7 +45,7 @@ class _QuickReplySheetState extends ConsumerState<_QuickReplySheet> {
 
     return Container(
       decoration: const BoxDecoration(
-        color: SupportColors.surface,
+        color: AppColors.surface,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
@@ -76,7 +76,7 @@ class _QuickReplySheetState extends ConsumerState<_QuickReplySheet> {
       width: 36,
       height: 4,
       decoration: BoxDecoration(
-        color: SupportColors.border,
+        color: AppColors.border,
         borderRadius: BorderRadius.circular(2),
       ),
     );
@@ -107,22 +107,22 @@ class _QuickReplySheetState extends ConsumerState<_QuickReplySheet> {
       onChanged: (value) => setState(() => _searchQuery = value),
       decoration: InputDecoration(
         hintText: 'Search replies…',
-        hintStyle: const TextStyle(color: SupportColors.textSecondary),
+        hintStyle: const TextStyle(color: AppColors.textSecondary),
         prefixIcon: const Icon(
           Icons.search,
           size: 18,
-          color: SupportColors.textSecondary,
+          color: AppColors.textSecondary,
         ),
         filled: true,
-        fillColor: SupportColors.surfaceAlt,
+        fillColor: AppColors.surfaceAlt,
         contentPadding: const EdgeInsets.symmetric(vertical: 0),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: SupportColors.border),
+          borderSide: const BorderSide(color: AppColors.border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: SupportColors.border),
+          borderSide: const BorderSide(color: AppColors.border),
         ),
       ),
     );
@@ -157,14 +157,14 @@ class _QuickReplySheetState extends ConsumerState<_QuickReplySheet> {
           Icon(
             Icons.chat_bubble_outline_rounded,
             size: 40,
-            color: SupportColors.border,
+            color: AppColors.border,
           ),
           SizedBox(height: 12),
           Text(
             'No quick replies found',
             style: TextStyle(
               fontSize: 14,
-              color: SupportColors.textSecondary,
+              color: AppColors.textSecondary,
             ),
           ),
           SizedBox(height: 4),
@@ -172,7 +172,7 @@ class _QuickReplySheetState extends ConsumerState<_QuickReplySheet> {
             'Try adjusting your search',
             style: TextStyle(
               fontSize: 12,
-              color: SupportColors.textSecondary,
+              color: AppColors.textSecondary,
             ),
           ),
         ],
@@ -182,7 +182,7 @@ class _QuickReplySheetState extends ConsumerState<_QuickReplySheet> {
 
   Widget _buildReplyItem(QuickReply reply, dynamic notifier) {
     return Card(
-      color: SupportColors.surfaceAlt,
+      color: AppColors.surfaceAlt,
       margin: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
@@ -201,7 +201,7 @@ class _QuickReplySheetState extends ConsumerState<_QuickReplySheet> {
                   const Icon(
                     Icons.bolt_rounded,
                     size: 14,
-                    color: SupportColors.accent,
+                    color: AppColors.accent,
                   ),
                   const SizedBox(width: 5),
                   Text(
@@ -216,7 +216,7 @@ class _QuickReplySheetState extends ConsumerState<_QuickReplySheet> {
                     '${reply.useCount}×',
                     style: const TextStyle(
                       fontSize: 11,
-                      color: SupportColors.textSecondary,
+                      color: AppColors.textSecondary,
                     ),
                   ),
                 ],
@@ -230,7 +230,7 @@ class _QuickReplySheetState extends ConsumerState<_QuickReplySheet> {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 12.5,
-                  color: SupportColors.textSecondary,
+                  color: AppColors.textSecondary,
                   height: 1.4,
                 ),
               ),
@@ -508,10 +508,10 @@ class QuickReplyDemo extends ConsumerWidget {
   @override
   Widget build(BuildContext ctx, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: SupportColors.bg,
+      backgroundColor: AppColors.bg,
       appBar: AppBar(
         title: const Text('Quick Reply Demo'),
-        backgroundColor: SupportColors.surface,
+        backgroundColor: AppColors.surface,
         actions: [
           IconButton(
             icon: const Icon(Icons.chat_rounded),
@@ -538,7 +538,7 @@ class QuickReplyDemo extends ConsumerWidget {
           icon: const Icon(Icons.chat_rounded),
           label: const Text('Open Quick Reply Picker'),
           style: ElevatedButton.styleFrom(
-            backgroundColor: SupportColors.accent,
+            backgroundColor: AppColors.accent,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             shape: RoundedRectangleBorder(

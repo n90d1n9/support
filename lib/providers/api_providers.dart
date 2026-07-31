@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import '../models/ticket.dart';
-import 'ticket_providers.dart';
+import '../models/ai_insight.dart';
+import '../features/sentiment/models/sentiment_level.dart';
+import '../features/ticket/models/ticket.dart';
+import '../features/ticket/providers/ticket_board_provider.dart';
 
 final apiKeyProvider = StateProvider<String>((_) => '');
 
@@ -164,9 +166,8 @@ class AiInsightNotifier extends StateNotifier<Map<String, AiInsightState>> {
         suggestedCategory: ticket.category,
         suggestedPriority: p,
         sentiment: s,
-        summary: j['summary'] as String ?? ticket.subject,
-        suggestedReplies:
-            List<String>.from(j['suggestedReplies'] as List ?? []));
+        summary: j['summary'] as String,
+        suggestedReplies: List<String>.from(j['suggestedReplies'] as List));
   }
 
   AiInsight _heuristic(Ticket ticket) {

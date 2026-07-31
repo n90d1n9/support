@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/ticket.dart';
-import '../utils/support_theme.dart';
+import '../features/ticket/models/ticket.dart';
+import '../utils/app_theme.dart';
 
 class _Pill extends StatelessWidget {
   final String text;
@@ -34,7 +34,7 @@ class PriorityBadge extends StatelessWidget {
   @override
   Widget build(BuildContext ctx) => _Pill(
       text: priority.label,
-      color: SupportColors.priorityColor(priority),
+      color: AppColors.priorityColor(priority),
       icon: priority == TicketPriority.critical
           ? Icons.priority_high_rounded
           : null);
@@ -45,7 +45,7 @@ class StatusBadge extends StatelessWidget {
   const StatusBadge({super.key, required this.status});
   @override
   Widget build(BuildContext ctx) =>
-      _Pill(text: status.label, color: SupportColors.statusColor(status));
+      _Pill(text: status.label, color: AppColors.statusColor(status));
 }
 
 class CategoryBadge extends StatelessWidget {
@@ -56,6 +56,6 @@ class CategoryBadge extends StatelessWidget {
       text: category.label,
       color: category.isSafetyCritical
           ? const Color(0xFFFF5C72)
-          : SupportColors.textSecondary,
+          : AppColors.textSecondary,
       icon: category.isSafetyCritical ? Icons.shield_rounded : null);
 }

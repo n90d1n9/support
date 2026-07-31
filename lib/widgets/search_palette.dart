@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/feature_providers.dart';
-import '../utils/support_theme.dart';
-import '../screens/ticket_detail_screen.dart';
+
+import '../features/operation/widgets/search_provider.dart';
+import '../utils/app_theme.dart';
+import '../features/ticket/screens/ticket_detail_screen.dart';
 
 void showSearchPalette(BuildContext ctx) {
   showDialog(
@@ -84,9 +85,9 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
           width: 560,
           margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
-            color: SupportColors.surface,
+            color: AppColors.surface,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: SupportColors.border),
+            border: Border.all(color: AppColors.border),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.4),
@@ -105,7 +106,7 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
                   children: [
                     const Icon(
                       Icons.search_rounded,
-                      color: SupportColors.textSecondary,
+                      color: AppColors.textSecondary,
                       size: 20,
                     ),
                     const SizedBox(width: 10),
@@ -115,12 +116,12 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
                         autofocus: true,
                         style: const TextStyle(
                           fontSize: 15,
-                          color: SupportColors.textPrimary,
+                          color: AppColors.textPrimary,
                         ),
                         decoration: const InputDecoration(
                           hintText: 'Search tickets, KB articles…',
                           hintStyle: TextStyle(
-                            color: SupportColors.textSecondary,
+                            color: AppColors.textSecondary,
                             fontSize: 15,
                           ),
                           border: InputBorder.none,
@@ -143,15 +144,15 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 6, vertical: 3),
                         decoration: BoxDecoration(
-                          color: SupportColors.surfaceAlt,
+                          color: AppColors.surfaceAlt,
                           borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: SupportColors.border),
+                          border: Border.all(color: AppColors.border),
                         ),
                         child: const Text(
                           'Esc',
                           style: TextStyle(
                             fontSize: 10,
-                            color: SupportColors.textSecondary,
+                            color: AppColors.textSecondary,
                           ),
                         ),
                       ),
@@ -174,7 +175,7 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
                       '↑↓ navigate  ↵ open  Esc close',
                       style: TextStyle(
                         fontSize: 11,
-                        color: SupportColors.textSecondary,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                   ],
@@ -197,13 +198,13 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
             const Icon(
               Icons.search_off_rounded,
               size: 36,
-              color: SupportColors.border,
+              color: AppColors.border,
             ),
             const SizedBox(height: 8),
             Text(
               'No results for "${_controller.text}"',
               style: const TextStyle(
-                color: SupportColors.textSecondary,
+                color: AppColors.textSecondary,
                 fontSize: 14,
               ),
             ),
@@ -219,7 +220,7 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
         child: Text(
           'Type to search tickets and KB articles…',
           style: TextStyle(
-            color: SupportColors.textSecondary,
+            color: AppColors.textSecondary,
             fontSize: 13.5,
           ),
         ),
@@ -243,7 +244,7 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               color: isSelected
-                  ? SupportColors.accent.withValues(alpha: 0.1)
+                  ? AppColors.accent.withValues(alpha: 0.1)
                   : Colors.transparent,
               child: Row(
                 children: [
@@ -252,7 +253,7 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
                     height: 30,
                     decoration: BoxDecoration(
                       color: isTicket
-                          ? SupportColors.accent.withValues(alpha: 0.12)
+                          ? AppColors.accent.withValues(alpha: 0.12)
                           : const Color(0xFF7BD389).withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -261,9 +262,8 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
                           ? Icons.confirmation_number_outlined
                           : Icons.menu_book_outlined,
                       size: 14,
-                      color: isTicket
-                          ? SupportColors.accent
-                          : const Color(0xFF7BD389),
+                      color:
+                          isTicket ? AppColors.accent : const Color(0xFF7BD389),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -284,7 +284,7 @@ class _SearchPaletteState extends ConsumerState<_SearchPalette> {
                           result['subtitle'] ?? '',
                           style: const TextStyle(
                             fontSize: 11.5,
-                            color: SupportColors.textSecondary,
+                            color: AppColors.textSecondary,
                           ),
                         ),
                       ],

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/analytics.dart';
-import '../models/ticket.dart';
-import '../providers/analytics_providers.dart';
-import '../providers/ticket_providers.dart';
-import '../utils/support_theme.dart';
-import 'mini_chart.dart';
+import '../features/analytics/models/analytics.dart';
+import '../features/ticket/models/ticket.dart';
+import '../features/analytics/providers/analytics_providers.dart';
+import '../features/operation/providers/clock_provider.dart';
+import '../utils/app_theme.dart';
+import '../features/chart/widgets/mini_chart.dart';
 
 class KpiStrip extends ConsumerWidget {
   const KpiStrip({super.key});
@@ -23,9 +23,9 @@ class KpiStrip extends ConsumerWidget {
           'Open Tickets',
           '${snap.totalOpen}',
           Icons.confirmation_number_outlined,
-          SupportColors.accent,
+          AppColors.accent,
           created,
-          SupportColors.accent),
+          AppColors.accent),
       _Kd(
           'SLA Breached',
           '${escQueue.where((t) => t.sla.isBreached(now)).length}',
@@ -86,14 +86,11 @@ class _KpiCard extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(12, 12, 12, 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: SupportColors.border),
+          border: Border.all(color: AppColors.border),
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                data.color.withValues(alpha: 0.10),
-                SupportColors.surface
-              ])),
+              colors: [data.color.withValues(alpha: 0.10), AppColors.surface])),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
           Icon(data.icon, color: data.color, size: 16),
@@ -112,20 +109,20 @@ class _KpiCard extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
-                  color: SupportColors.textPrimary)),
+                  color: AppColors.textPrimary)),
           if (data.suffix != null)
             Padding(
                 padding: const EdgeInsets.only(bottom: 2, left: 1),
                 child: Text(data.suffix!,
                     style: const TextStyle(
                         fontSize: 12,
-                        color: SupportColors.textSecondary,
+                        color: AppColors.textSecondary,
                         fontWeight: FontWeight.w600)))
         ]),
         const SizedBox(height: 2),
         Text(data.label,
-            style: const TextStyle(
-                fontSize: 11, color: SupportColors.textSecondary))
+            style:
+                const TextStyle(fontSize: 11, color: AppColors.textSecondary))
       ]));
 }
 
@@ -139,20 +136,20 @@ class _PriorityRow extends StatelessWidget {
     return Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-            color: SupportColors.surfaceAlt,
+            color: AppColors.surfaceAlt,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: SupportColors.border)),
+            border: Border.all(color: AppColors.border)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
             const Text('Priority distribution — open tickets',
                 style: TextStyle(
                     fontSize: 11.5,
                     fontWeight: FontWeight.w600,
-                    color: SupportColors.textSecondary)),
+                    color: AppColors.textSecondary)),
             const Spacer(),
             Text('${d.total} total',
                 style: const TextStyle(
-                    fontSize: 11, color: SupportColors.textSecondary))
+                    fontSize: 11, color: AppColors.textSecondary))
           ]),
           const SizedBox(height: 8),
           PriorityHeatBar(
@@ -164,12 +161,11 @@ class _PriorityRow extends StatelessWidget {
           const SizedBox(height: 8),
           Row(children: [
             _PL(d.critical, 'Critical',
-                SupportColors.priorityColor(TicketPriority.critical)),
-            _PL(d.high, 'High',
-                SupportColors.priorityColor(TicketPriority.high)),
+                AppColors.priorityColor(TicketPriority.critical)),
+            _PL(d.high, 'High', AppColors.priorityColor(TicketPriority.high)),
             _PL(d.normal, 'Normal',
-                SupportColors.priorityColor(TicketPriority.normal)),
-            _PL(d.low, 'Low', SupportColors.priorityColor(TicketPriority.low))
+                AppColors.priorityColor(TicketPriority.normal)),
+            _PL(d.low, 'Low', AppColors.priorityColor(TicketPriority.low))
           ])
         ]));
   }
@@ -190,8 +186,8 @@ class _PL extends StatelessWidget {
                 color: color, borderRadius: BorderRadius.circular(2))),
         const SizedBox(width: 5),
         Text('$count $label',
-            style: const TextStyle(
-                fontSize: 10, color: SupportColors.textSecondary),
+            style:
+                const TextStyle(fontSize: 10, color: AppColors.textSecondary),
             overflow: TextOverflow.ellipsis)
       ]));
 }
