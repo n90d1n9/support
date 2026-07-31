@@ -5,6 +5,7 @@ import '../../customer/models/customer.dart';
 import '../../template/models/template.dart';
 import '../models/ticket_category.dart';
 import '../models/ticket_priority.dart';
+import '../models/comm_channel.dart';
 import '../providers/ticket_board_provider.dart';
 import '../../../constants/app_constants.dart';
 import '../../chat/widgets/chatbot_deflect_widget.dart';
@@ -74,7 +75,8 @@ class _DialogState extends ConsumerState<_Dialog> {
           authorId: 'system',
           authorName: 'System',
           isAgent: true,
-          body: _tpl!.resolveMessage(buildContext(t, agentName: 'Agent')));
+          body: _tpl!.resolveMessage(buildContext(t, agentName: 'Agent')),
+          channel: CommChannel.inAppChat);
     }
     Navigator.pop(context);
   }

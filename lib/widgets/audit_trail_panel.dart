@@ -27,6 +27,8 @@ IconData _icon(AuditAction a) {
       return Icons.star_outline_rounded;
     case AuditAction.aiSuggestionApplied:
       return Icons.auto_awesome_rounded;
+    case AuditAction.closed:
+      return Icons.check_circle_outline_rounded;
   }
 }
 

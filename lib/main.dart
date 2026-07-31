@@ -49,7 +49,8 @@ class _RootState extends ConsumerState<_Root> {
       ref.read(domainProvider.notifier).loadFromPreset('domain-ride-support');
     }
     // Listen to ticket board changes and drain notifications
-    _ticketListener = ref.listenManual(ticketBoardProvider, (_, __) => _drainNotifications());
+    _ticketListener = ref.listenManual<TicketBoardNotifier, List<Ticket>>(
+        ticketBoardProvider, (_, __) => _drainNotifications());
   }
 
   void _drainNotifications() {
