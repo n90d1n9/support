@@ -5,10 +5,12 @@ import '../models/domain_config.dart';
 class DomainNotifier extends StateNotifier<SupportDomain?> {
   DomainNotifier() : super(null);
 
+  /// Set the active domain
   void setActiveDomain(SupportDomain domain) {
     state = domain;
   }
 
+  /// Load domain from a preset by ID
   void loadFromPreset(String presetId) {
     final presets = DomainPresets.getAllPresets();
     try {
@@ -19,37 +21,75 @@ class DomainNotifier extends StateNotifier<SupportDomain?> {
     }
   }
 
+  /// Get the active domain
   SupportDomain? get activeDomain => state;
 
+  /// Check if a domain is configured
   bool get isDomainConfigured => state != null;
 
+  /// Get the active domain name
   String get activeDomainName => state?.name ?? 'Support Platform';
 
+  /// Get all categories
   List<CategoryDefinition> get categories => state?.categories ?? [];
 
+  /// Get all teams
   List<TeamDefinition> get teams => state?.teams ?? [];
 
+  /// Get all customer types
   List<CustomerTypeDefinition> get customerTypes => state?.customerTypes ?? [];
 
+  /// Get category by ID
   CategoryDefinition? getCategoryById(String id) => state?.getCategoryById(id);
 
+  /// Get team by ID
   TeamDefinition? getTeamById(String id) => state?.getTeamById(id);
 
+  /// Get customer type by ID
   CustomerTypeDefinition? getCustomerTypeById(String id) =>
       state?.getCustomerTypeById(id);
 
-  void addCategory(CategoryDefinition category) {
+  /// Get category by name (case-insensitive)
+  CategoryDefinition? getCategoryByName(String name) =>
+      state?.getCategoryByName(name);
+
+  /// Get team by name (case-insensitive)
+  TeamDefinition? getTeamByName(String name) => state?.getTeamByName(name);
+
+  /// Get customer type by name (case-insensitive)
+  CustomerTypeDefinition? getCustomerTypeByName(String name) =>
+      state?.getCustomerTypeByName(name);
+
+  /// Validate current domain configuration
+  DomainValidationResult? validateDomain() => state?.validate();
+
+  /// Add a new category with duplicate ID check
+  bool addCategory(CategoryDefinition category) {
     final currentState = state;
-    if (currentState == null) return;
+    if (currentState == null) return false;
+    
+    // Check for duplicate ID
+    if (currentState.getCategoryById(category.id) != null) {
+      return false;
+    }
+    
     state = currentState.copyWith(
       categories: [...currentState.categories, category],
       updatedAt: DateTime.now(),
     );
+    return true;
   }
 
-  void updateCategory(String categoryId, CategoryDefinition updates) {
+  /// Update an existing category
+  bool updateCategory(String categoryId, CategoryDefinition updates) {
     final currentState = state;
-    if (currentState == null) return;
+    if (currentState == null) return false;
+    
+    // Check if category exists
+    if (currentState.getCategoryById(categoryId) == null) {
+      return false;
+    }
+    
     final updatedCategories = currentState.categories.map((c) {
       if (c.id == categoryId) {
         return updates;
@@ -60,30 +100,56 @@ class DomainNotifier extends StateNotifier<SupportDomain?> {
       categories: updatedCategories,
       updatedAt: DateTime.now(),
     );
+    return true;
   }
 
-  void removeCategory(String categoryId) {
+  /// Remove a category by ID
+  bool removeCategory(String categoryId) {
     final currentState = state;
-    if (currentState == null) return;
+    if (currentState == null) return false;
+    
+    final newCategories = currentState.categories
+        .where((c) => c.id != categoryId)
+        .toList();
+    
+    if (newCategories.length == currentState.categories.length) {
+      return false; // Category not found
+    }
+    
     state = currentState.copyWith(
-      categories:
-          currentState.categories.where((c) => c.id != categoryId).toList(),
+      categories: newCategories,
       updatedAt: DateTime.now(),
     );
+    return true;
   }
 
-  void addTeam(TeamDefinition team) {
+  /// Add a new team with duplicate ID check
+  bool addTeam(TeamDefinition team) {
     final currentState = state;
-    if (currentState == null) return;
+    if (currentState == null) return false;
+    
+    // Check for duplicate ID
+    if (currentState.getTeamById(team.id) != null) {
+      return false;
+    }
+    
     state = currentState.copyWith(
       teams: [...currentState.teams, team],
       updatedAt: DateTime.now(),
     );
+    return true;
   }
 
-  void updateTeam(String teamId, TeamDefinition updates) {
+  /// Update an existing team
+  bool updateTeam(String teamId, TeamDefinition updates) {
     final currentState = state;
-    if (currentState == null) return;
+    if (currentState == null) return false;
+    
+    // Check if team exists
+    if (currentState.getTeamById(teamId) == null) {
+      return false;
+    }
+    
     final updatedTeams = currentState.teams.map((t) {
       if (t.id == teamId) {
         return updates;
@@ -94,30 +160,55 @@ class DomainNotifier extends StateNotifier<SupportDomain?> {
       teams: updatedTeams,
       updatedAt: DateTime.now(),
     );
+    return true;
   }
 
-  void removeTeam(String teamId) {
+  /// Remove a team by ID
+  bool removeTeam(String teamId) {
     final currentState = state;
-    if (currentState == null) return;
+    if (currentState == null) return false;
+    
+    final newTeams = currentState.teams.where((t) => t.id != teamId).toList();
+    
+    if (newTeams.length == currentState.teams.length) {
+      return false; // Team not found
+    }
+    
     state = currentState.copyWith(
-      teams: currentState.teams.where((t) => t.id != teamId).toList(),
+      teams: newTeams,
       updatedAt: DateTime.now(),
     );
+    return true;
   }
 
-  void addCustomerType(CustomerTypeDefinition customerType) {
+  /// Add a new customer type with duplicate ID check
+  bool addCustomerType(CustomerTypeDefinition customerType) {
     final currentState = state;
-    if (currentState == null) return;
+    if (currentState == null) return false;
+    
+    // Check for duplicate ID
+    if (currentState.getCustomerTypeById(customerType.id) != null) {
+      return false;
+    }
+    
     state = currentState.copyWith(
       customerTypes: [...currentState.customerTypes, customerType],
       updatedAt: DateTime.now(),
     );
+    return true;
   }
 
-  void updateCustomerType(
+  /// Update an existing customer type
+  bool updateCustomerType(
       String customerTypeId, CustomerTypeDefinition updates) {
     final currentState = state;
-    if (currentState == null) return;
+    if (currentState == null) return false;
+    
+    // Check if customer type exists
+    if (currentState.getCustomerTypeById(customerTypeId) == null) {
+      return false;
+    }
+    
     final updatedCustomerTypes = currentState.customerTypes.map((c) {
       if (c.id == customerTypeId) {
         return updates;
@@ -128,21 +219,48 @@ class DomainNotifier extends StateNotifier<SupportDomain?> {
       customerTypes: updatedCustomerTypes,
       updatedAt: DateTime.now(),
     );
+    return true;
   }
 
-  void removeCustomerType(String customerTypeId) {
+  /// Remove a customer type by ID
+  bool removeCustomerType(String customerTypeId) {
     final currentState = state;
-    if (currentState == null) return;
+    if (currentState == null) return false;
+    
+    final newCustomerTypes = currentState.customerTypes
+        .where((c) => c.id != customerTypeId)
+        .toList();
+    
+    if (newCustomerTypes.length == currentState.customerTypes.length) {
+      return false; // Customer type not found
+    }
+    
     state = currentState.copyWith(
-      customerTypes: currentState.customerTypes
-          .where((c) => c.id != customerTypeId)
-          .toList(),
+      customerTypes: newCustomerTypes,
       updatedAt: DateTime.now(),
     );
+    return true;
   }
 
+  /// Reset to a preset configuration
   void resetToPreset(String presetId) {
     loadFromPreset(presetId);
+  }
+
+  /// Import domain from JSON
+  bool importFromJson(Map<String, dynamic> json) {
+    try {
+      final domain = SupportDomain.fromJson(json);
+      state = domain;
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Export current domain to JSON
+  Map<String, dynamic>? exportToJson() {
+    return state?.toJson();
   }
 }
 
