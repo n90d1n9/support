@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../ticket/models/ticket.dart';
+import '../../ticket/models/sla_state.dart';
 import '../providers/clock_provider.dart';
 import '../../../utils/app_theme.dart';
 

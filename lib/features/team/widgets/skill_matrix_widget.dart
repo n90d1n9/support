@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../ticket/models/ticket.dart';
+
 import '../../operation/providers/agent_providers.dart';
 import '../../../utils/app_theme.dart';
+import '../../ticket/models/ticket_category.dart';
 
 class SkillMatrixWidget extends ConsumerWidget {
   const SkillMatrixWidget({super.key});

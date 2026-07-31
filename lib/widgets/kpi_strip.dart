@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../features/analytics/models/analytics.dart';
-import '../features/ticket/models/ticket.dart';
 import '../features/analytics/providers/analytics_providers.dart';
 import '../features/operation/providers/clock_provider.dart';
+import '../features/ticket/models/ticket_priority.dart';
 import '../utils/app_theme.dart';
 import '../features/chart/widgets/mini_chart.dart';
 

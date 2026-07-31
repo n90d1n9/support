@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../team/models/support_team.dart';
-import '../../ticket/models/ticket.dart';
+import '../../ticket/models/ticket_category.dart';
 import '../providers/analytics_providers.dart';
 import '../../../utils/app_theme.dart';
 import '../../chart/widgets/mini_chart.dart';

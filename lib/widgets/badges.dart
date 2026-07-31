@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../features/ticket/models/ticket.dart';
+import '../features/ticket/models/ticket_category.dart';
+import '../features/ticket/models/ticket_priority.dart';
+import '../features/ticket/models/ticket_status.dart';
 import '../utils/app_theme.dart';
 
 class _Pill extends StatelessWidget {

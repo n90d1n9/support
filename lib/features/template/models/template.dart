@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import '../../team/models/support_team.dart';
 import '../../ticket/models/ticket.dart';
+import '../../ticket/models/ticket_category.dart';
+import '../../ticket/models/ticket_priority.dart';
 
 String applyVariables(String template, Map<String, String> ctx) {
   var r = template;

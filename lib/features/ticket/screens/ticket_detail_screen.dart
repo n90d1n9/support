@@ -4,6 +4,7 @@ import '../../customer/models/customer.dart';
 import '../../operation/providers/presence_provider.dart';
 import '../../operation/providers/reminder_provider.dart';
 import '../models/ticket.dart';
+import '../models/ticket_status.dart';
 import '../providers/ticket_board_provider.dart';
 import '../providers/ticket_providers.dart';
 import '../../../utils/app_theme.dart';

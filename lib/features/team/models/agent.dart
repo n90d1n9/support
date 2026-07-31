@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
+
+import '../../ticket/models/ticket_category.dart';
 import 'support_team.dart';
-import '../../ticket/models/ticket.dart';
 
 enum AgentStatus { online, busy, away, offline }
 
@@ -71,26 +72,4 @@ class Agent {
           activeTicketCount: activeTicketCount ?? this.activeTicketCount,
           maxCapacity: maxCapacity,
           stats: stats ?? this.stats);
-}
-
-@immutable
-class QuickReply {
-  final String id, title, body;
-  final List<TicketCategory> applicableCategories;
-  final CommChannel channel;
-  final int useCount;
-  const QuickReply(
-      {required this.id,
-      required this.title,
-      required this.body,
-      this.applicableCategories = const [],
-      this.channel = CommChannel.inAppChat,
-      this.useCount = 0});
-  QuickReply withUseCount(int n) => QuickReply(
-      id: id,
-      title: title,
-      body: body,
-      applicableCategories: applicableCategories,
-      channel: channel,
-      useCount: n);
 }

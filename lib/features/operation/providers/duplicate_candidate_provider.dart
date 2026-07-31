@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../ticket/models/ticket.dart';
+import '../../ticket/models/ticket_status.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
 
 List<Ticket> findDuplicates(String subject, List<Ticket> all) {

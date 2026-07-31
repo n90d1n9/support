@@ -1,8 +1,9 @@
 // Knowledge Base - Full CRUD Operations
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../ticket/models/ticket_category.dart';
 import '../models/kb_article.dart';
-import '../../ticket/models/ticket.dart';
+import '../models/kb_article_type.dart';
 
 class KnowledgeBaseNotifier extends StateNotifier<List<KbArticle>> {
   KnowledgeBaseNotifier() : super(_seed());

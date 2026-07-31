@@ -1,7 +1,12 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import '../models/ai_insight.dart';
+import '../features/ai/models/ai_insight.dart';
+import '../features/ticket/models/comm_channel.dart';
+import '../features/ticket/models/ticket_category.dart';
+import '../features/ticket/models/ticket_message.dart';
+import '../features/ticket/models/ticket_priority.dart';
+import '../features/ticket/models/ticket_status.dart';
 import '../features/sentiment/models/sentiment_level.dart';
 import '../features/ticket/models/ticket.dart';
 import '../features/ticket/providers/ticket_board_provider.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../features/ticket/models/ticket.dart';
+
+import '../features/ticket/models/ticket_status.dart';
 import '../features/ticket/providers/ticket_board_provider.dart';
 import '../features/operation/providers/agent_providers.dart';
 import '../utils/app_theme.dart';
@@ -47,15 +48,21 @@ class BulkActionBar extends ConsumerWidget {
                   fontSize: 13)),
           const SizedBox(width: 12),
           _Btn('Escalate', Icons.trending_up_rounded, () {
-            for (final id in sel) n.escalate(id);
+            for (final id in sel) {
+              n.escalate(id);
+            }
           }),
           const SizedBox(width: 6),
           _Btn('Assign', Icons.assignment_ind_rounded, () {
-            for (final id in sel) n.autoAssign(id);
+            for (final id in sel) {
+              n.autoAssign(id);
+            }
           }),
           const SizedBox(width: 6),
           _Btn('Resolve', Icons.task_alt_rounded, () {
-            for (final id in sel) n.changeStatus(id, TicketStatus.resolved);
+            for (final id in sel) {
+              n.changeStatus(id, TicketStatus.resolved);
+            }
           }),
           const Spacer(),
           IconButton(

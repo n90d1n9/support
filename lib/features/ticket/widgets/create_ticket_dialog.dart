@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../customer/models/customer.dart';
 import '../../template/models/template.dart';
-import '../models/ticket.dart';
+import '../models/ticket_category.dart';
+import '../models/ticket_priority.dart';
 import '../providers/ticket_board_provider.dart';
 import '../../../utils/app_theme.dart';
 import '../../chat/widgets/chatbot_deflect_widget.dart';

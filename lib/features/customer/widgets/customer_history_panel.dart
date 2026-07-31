@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../../ticket/models/ticket_category.dart';
+import '../../ticket/models/ticket_status.dart';
 import '../models/customer.dart';
 import '../../ticket/models/ticket.dart';
 import '../../ticket/providers/ticket_board_provider.dart';

@@ -1,8 +1,9 @@
 import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../operation/models/notification.dart';
-import '../../ticket/models/ticket.dart';
 import '../../operation/providers/clock_provider.dart';
+import '../../ticket/models/ticket_status.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
 
 String _nid() =>

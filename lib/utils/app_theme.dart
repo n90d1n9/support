@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../features/ticket/models/ticket.dart';
+
+import '../features/ticket/models/ticket_priority.dart';
+import '../features/ticket/models/ticket_status.dart';
 
 class AppColors {
   AppColors._();

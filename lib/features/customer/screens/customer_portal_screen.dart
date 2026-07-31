@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../../ticket/models/ticket_category.dart';
+import '../../ticket/models/ticket_status.dart';
 import '../models/customer.dart';
 import '../../operation/models/message.dart';
 import '../../ticket/models/ticket.dart';
@@ -13,9 +15,6 @@ import '../../operation/widgets/sla_timer.dart';
 const _customerId = 'pax-001';
 const _customerName = 'Rina Wijaya';
 
-// ============================================
-// CUSTOMER PORTAL SCREEN
-// ============================================
 class CustomerPortalScreen extends ConsumerWidget {
   const CustomerPortalScreen({super.key});
 
@@ -125,10 +124,6 @@ class CustomerPortalScreen extends ConsumerWidget {
       ],
     );
   }
-
-  // ==========================================
-  // ACTIONS
-  // ==========================================
 
   void _createNewTicket(BuildContext ctx, WidgetRef ref) {
     final subjectController = TextEditingController();

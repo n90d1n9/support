@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../ticket/models/ticket.dart';
 import '../../knowledge/providers/knowledge_base_provider.dart';
+import '../../ticket/models/ticket_status.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
 
 class SearchNotifier extends StateNotifier<String> {

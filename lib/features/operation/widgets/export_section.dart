@@ -7,7 +7,9 @@ import '../../customer/models/customer.dart';
 import '../../../utils/app_theme.dart';
 import '../../settings/widgets/setting_card.dart';
 import '../../team/models/support_team.dart';
-import '../../ticket/models/ticket.dart';
+import '../../ticket/models/ticket_category.dart';
+import '../../ticket/models/ticket_priority.dart';
+import '../../ticket/models/ticket_status.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
 
 class ExportSection extends ConsumerWidget {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../team/models/support_team.dart';
-import '../models/ticket.dart';
+import '../models/ticket_category.dart';
+import '../models/ticket_priority.dart';
+import '../models/ticket_status.dart';
 import '../providers/ticket_providers.dart';
 import '../../../utils/app_theme.dart';
 

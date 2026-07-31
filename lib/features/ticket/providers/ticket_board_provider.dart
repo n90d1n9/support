@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../models/ai_insight.dart';
 import '../../../models/audit_entry.dart';
+import '../../ai/models/ai_insight.dart';
 import '../../csat/models/csat_feedback.dart';
 import '../../customer/models/customer.dart';
 import '../../operation/models/linked_entity_ref.dart';
@@ -11,8 +11,15 @@ import '../../operation/models/notification.dart';
 import '../../refund/models/refund_request.dart';
 import '../../sentiment/models/sentiment_level.dart';
 import '../../team/models/support_team.dart';
+import '../models/comm_channel.dart';
+import '../models/sla_state.dart';
 import '../models/ticket.dart';
 import '../../operation/models/workflow.dart';
+import '../models/ticket_attachement.dart';
+import '../models/ticket_category.dart';
+import '../models/ticket_message.dart';
+import '../models/ticket_priority.dart';
+import '../models/ticket_status.dart';
 import 'ticket_providers.dart';
 
 class TicketBoardNotifier extends StateNotifier<List<Ticket>> {

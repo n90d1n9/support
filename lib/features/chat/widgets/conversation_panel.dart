@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../../ticket/models/comm_channel.dart';
 import '../../ticket/models/ticket.dart';
 import '../../operation/models/notification.dart';
 import '../../ticket/providers/ticket_board_provider.dart';
@@ -8,7 +9,7 @@ import '../../ticket/providers/ticket_providers.dart';
 import '../../operation/providers/agent_providers.dart';
 import '../../notification/providers/notification_providers.dart';
 import '../../../utils/app_theme.dart';
-import '../../../widgets/quick_reply_picker.dart';
+import '../services/show_quick_reply_picker.dart';
 
 class ConversationPanel extends ConsumerStatefulWidget {
   final Ticket ticket;
@@ -178,6 +179,45 @@ class _ConversationPanelState extends ConsumerState<ConversationPanel>
         return Icons.call_outlined;
       case CommChannel.internalNote:
         return Icons.lock_outline;
+      case CommChannel.sms:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.facebookMessenger:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.twitter:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.telegram:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.line:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.weChat:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.viber:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.skype:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.slack:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.microsoftTeams:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.webChat:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.voiceCall:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case CommChannel.videoCall:
+        // TODO: Handle this case.
+        throw UnimplementedError();
     }
   }
 

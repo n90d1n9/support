@@ -29,6 +29,42 @@ class RefundRequest {
       requestedAt: requestedAt,
       stage: stage ?? this.stage,
       reason: reason);
+
+  /// Convert to JSON for storage
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'ticketId': ticketId,
+      'requestedBy': requestedBy,
+      'reason': reason,
+      'type': type.name,
+      'amount': amount,
+      'currency': currency,
+      'stage': stage.name,
+      'requestedAt': requestedAt.toIso8601String(),
+    };
+  }
+
+  /// Create from JSON
+  factory RefundRequest.fromJson(Map<String, dynamic> json) {
+    return RefundRequest(
+      id: json['id'] as String,
+      ticketId: json['ticketId'] as String,
+      requestedBy: json['requestedBy'] as String,
+      reason: json['reason'] as String?,
+      type: RefundType.values.firstWhere(
+        (e) => e.name == json['type'],
+        orElse: () => RefundType.full,
+      ),
+      amount: (json['amount'] as num).toDouble(),
+      currency: json['currency'] as String,
+      stage: RefundApprovalStage.values.firstWhere(
+        (e) => e.name == json['stage'],
+        orElse: () => RefundApprovalStage.none,
+      ),
+      requestedAt: DateTime.parse(json['requestedAt'] as String),
+    );
+  }
 }
 
 enum RefundType { full, partial, walletCredit }

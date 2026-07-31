@@ -7,6 +7,7 @@ import '../../../utils/app_theme.dart';
 import '../../../widgets/badges.dart';
 import '../../operation/widgets/sla_timer.dart';
 import '../../operation/widgets/sla_progress_bar.dart';
+import '../models/ticket_priority.dart';
 
 class TicketCard extends ConsumerWidget {
   final Ticket ticket;

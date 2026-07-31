@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../ticket/models/ticket.dart';
+import '../../ticket/models/ticket_category.dart';
+import '../../ticket/models/ticket_priority.dart';
 import '../models/template.dart';
 
 class TemplateNotifier extends StateNotifier<List<TicketTemplate>> {
