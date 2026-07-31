@@ -121,7 +121,34 @@ class TicketBoardNotifier extends StateNotifier<List<Ticket>> {
       required bool isAgent,
       required String body,
       required bool isInternal,
-      required CommChannel channel}) {}
+      required CommChannel channel}) {
+    final idx = state.indexWhere((t) => t.id == id);
+    if (idx == -1) return;
+    final ticket = state[idx];
+    final msg = TicketMessage(
+        id: generateId('M'),
+        channel: channel,
+        authorId: authorId,
+        authorName: authorName,
+        isAgent: isAgent,
+        body: body,
+        sentAt: DateTime.now(),
+        isInternal: isInternal);
+    final updated = ticket.copyWith(
+        messages: [...ticket.messages, msg],
+        sla: ticket.sla.copyWith(
+            firstResponseAt: ticket.sla.firstResponseAt ??
+                (isAgent ? DateTime.now() : null)));
+    state = [...state]..[idx] = updated;
+    _q(
+        type: isInternal
+            ? NotificationType.assigned
+            : NotificationType.customerReplied,
+        message:
+            '${isAgent ? 'Agent' : 'Customer'} replied in $id',
+        ticketId: id,
+        ticketNumber: ticket.ticketNumber);
+  }
 
   void recordCsat(String id, {required int score}) {}
 
