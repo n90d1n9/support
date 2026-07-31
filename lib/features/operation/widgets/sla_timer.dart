@@ -33,11 +33,11 @@ class SlaTimer extends ConsumerWidget {
     final remaining = target.difference(now);
     final breached = !resolved && remaining.isNegative;
     final color = resolved
-        ? const Color(0xFF7BD389)
+        ? AppColors.slaGood
         : breached
-            ? const Color(0xFFFF5C72)
+            ? AppColors.slaBreached
             : remaining.inMinutes < 10
-                ? const Color(0xFFFFA94D)
+                ? AppColors.slaWarning
                 : AppColors.textSecondary;
     if (resolved) return _w(color, Icons.check_circle_rounded, 'SLA met');
     return _w(color, breached ? Icons.warning_rounded : Icons.timer_outlined,

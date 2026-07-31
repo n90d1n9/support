@@ -74,7 +74,7 @@ class AssignmentPanel extends ConsumerWidget {
                       width: 8,
                       height: 8,
                       decoration: const BoxDecoration(
-                          color: Color(0xFF7BD389), shape: BoxShape.circle))
+                          color: AppColors.success, shape: BoxShape.circle))
                 ]))
           else
             const Text('Not yet assigned',
@@ -114,7 +114,7 @@ class AssignmentPanel extends ConsumerWidget {
                                 margin: const EdgeInsets.only(right: 6),
                                 decoration: BoxDecoration(
                                     color: a.status == AgentStatus.online
-                                        ? const Color(0xFF7BD389)
+                                        ? AppColors.success
                                         : AppColors.border,
                                     shape: BoxShape.circle)),
                             Text('${a.name} (${a.activeTicketCount})',

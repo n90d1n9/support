@@ -75,13 +75,13 @@ class WorkflowSection extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF54C7FC).withValues(alpha: 0.12),
+                        color: AppColors.info.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
                         rule.trigger.label,
                         style: const TextStyle(
-                          color: Color(0xFF54C7FC),
+                          color: AppColors.info,
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
                         ),

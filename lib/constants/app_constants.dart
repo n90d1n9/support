@@ -27,7 +27,33 @@ class AppColors {
   static const lightBorder = Color(0xFFE4E7EF);
   static const lightAccent = Color(0xFF4F6EF7);
 
-  // Semantic colors
+  // Semantic colors - Status
+  static const statusOpen = Color(0xFF54C7FC);
+  static const statusInProgress = Color(0xFF6C8CFF);
+  static const statusPending = Color(0xFFFFA94D);
+  static const statusResolved = Color(0xFF7BD389);
+  static const statusClosed = Color(0xFF9E9E9E);
+  static const statusEscalated = Color(0xFFFF5C72);
+  static const statusWaitingCustomer = Color(0xFFBA68C8);
+
+  // Semantic colors - Priority
+  static const priorityCritical = Color(0xFFFF5C72);
+  static const priorityHigh = Color(0xFFFFA94D);
+  static const priorityNormal = Color(0xFF54C7FC);
+  static const priorityLow = Color(0xFF7BD389);
+
+  // Semantic colors - SLA
+  static const slaGood = Color(0xFF7BD389);
+  static const slaWarning = Color(0xFFFFA94D);
+  static const slaBreached = Color(0xFFFF5C72);
+
+  // Semantic colors - Sentiment
+  static const sentimentPositive = Color(0xFF7BD389);
+  static const sentimentNeutral = Color(0xFF9E9E9E);
+  static const sentimentNegative = Color(0xFFFF5C72);
+  static const sentimentUrgent = Color(0xFFFF5C72);
+
+  // Error and feedback colors
   static const error = Color(0xFFFF5C72);
   static const warning = Color(0xFFFFA94D);
   static const info = Color(0xFF54C7FC);
@@ -41,9 +67,41 @@ class AppColors {
     end: Alignment.bottomRight,
   );
 
-  static Color statusColor(TicketStatus status) {}
+  /// Get color for ticket status - centralized business logic.
+  static Color statusColor(TicketStatus status) {
+    switch (status) {
+      case TicketStatus.created:
+      case TicketStatus.open:
+        return statusOpen;
+      case TicketStatus.inProgress:
+      case TicketStatus.assigned:
+        return statusInProgress;
+      case TicketStatus.pending:
+        return statusPending;
+      case TicketStatus.waitingCustomer:
+        return statusWaitingCustomer;
+      case TicketStatus.resolved:
+        return statusResolved;
+      case TicketStatus.closed:
+        return statusClosed;
+      case TicketStatus.escalated:
+        return statusEscalated;
+    }
+  }
 
-  static Color priorityColor(TicketPriority priority) {}
+  /// Get color for ticket priority - centralized business logic.
+  static Color priorityColor(TicketPriority priority) {
+    switch (priority) {
+      case TicketPriority.critical:
+        return priorityCritical;
+      case TicketPriority.high:
+        return priorityHigh;
+      case TicketPriority.normal:
+        return priorityNormal;
+      case TicketPriority.low:
+        return priorityLow;
+    }
+  }
 }
 
 /// Layout constants.
@@ -116,15 +174,33 @@ class FeatureFlags {
   static const bool enableKeyboardShortcuts = true;
 }
 
-/// API and service endpoints (placeholders for real implementation).
+/// API and service endpoints configuration.
+/// 
+/// These endpoints should be configured via environment variables or
+/// a secure configuration service in production. The default values
+/// are placeholders for development purposes.
 class ApiEndpoints {
   ApiEndpoints._();
 
-  static const String baseUrl = 'https://api.salam-support.example.com';
+  /// Base URL for the API - configure via environment variable in production
+  static const String baseUrl = String.fromEnvironment(
+    'SALAM_API_BASE_URL',
+    defaultValue: 'https://api.salam-support.example.com',
+  );
+  
   static const String ticketsEndpoint = '/v1/tickets';
   static const String customersEndpoint = '/v1/customers';
   static const String agentsEndpoint = '/v1/agents';
   static const String analyticsEndpoint = '/v1/analytics';
+  
+  /// Timeout settings for API calls
+  static const Duration connectionTimeout = Duration(seconds: 30);
+  static const Duration receiveTimeout = Duration(seconds: 30);
+  static const Duration sendTimeout = Duration(seconds: 30);
+  
+  /// Retry configuration
+  static const int maxRetryAttempts = 3;
+  static const Duration retryDelay = Duration(milliseconds: 500);
 }
 
 /// Time-related constants.

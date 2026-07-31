@@ -21,11 +21,11 @@ class SlaProgressBar extends ConsumerWidget {
     final breached = !resolved && progress >= 1.0;
     final warn = !resolved && progress >= 0.75;
     final color = resolved
-        ? const Color(0xFF7BD389)
+        ? AppColors.slaGood
         : breached
-            ? const Color(0xFFFF5C72)
+            ? AppColors.slaBreached
             : warn
-                ? const Color(0xFFFFA94D)
+                ? AppColors.slaWarning
                 : AppColors.accent;
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class SlaProgressBar extends ConsumerWidget {
               if (breached)
                 const Text('BREACHED',
                     style: TextStyle(
-                        color: Color(0xFFFF5C72),
+                        color: AppColors.slaBreached,
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.5))

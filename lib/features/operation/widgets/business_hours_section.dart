@@ -14,8 +14,8 @@ class BusinessHoursSection extends ConsumerWidget {
     final hours = ref.watch(businessHoursProvider);
     final notifier = ref.read(businessHoursProvider.notifier);
     final isOpen = ref.watch(isWithinBusinessHoursProvider);
-    final statusColor =
-        isOpen ? const Color(0xFF7BD389) : const Color(0xFFFFA94D);
+    // Use semantic colors for business hours status
+    final statusColor = isOpen ? AppColors.success : AppColors.warning;
 
     return SettingsCard(
       title: 'Business Hours & SLA Pause',
