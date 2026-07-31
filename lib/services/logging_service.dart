@@ -52,7 +52,7 @@ class TicketLogger {
     printer: PrettyPrinter(
       colors: true,
       printEmojis: true,
-      customLevelSyms: {
+      customLevelSymbols: {
         Level.info: '🎫',
         Level.warning: '⚠️',
         Level.error: '❌',

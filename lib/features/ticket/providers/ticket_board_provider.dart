@@ -108,20 +108,40 @@ class TicketBoardNotifier extends StateNotifier<List<Ticket>> {
 
   void autoAssign(String id) {}
 
-  void createTicket(
+  Ticket createTicket(
       {required CustomerType customerType,
       required String customerId,
       required String customerName,
       required TicketCategory category,
-      required String subject}) {}
+      required String subject,
+      TicketPriority priority = TicketPriority.normal}) {
+    final ticket = Ticket(
+        id: generateId('T'),
+        ticketNumber: 'TKT-${DateTime.now().millisecondsSinceEpoch}',
+        customerId: customerId,
+        customerName: customerName,
+        customerType: customerType,
+        category: category,
+        subject: subject,
+        priority: priority,
+        status: TicketStatus.open,
+        createdAt: DateTime.now(),
+        sla: SlaState(category: category));
+    state = [...state, ticket];
+    _q(type: NotificationType.assigned,
+        message: 'New ticket created: ${ticket.ticketNumber}',
+        ticketId: ticket.id,
+        ticketNumber: ticket.ticketNumber);
+    return ticket;
+  }
 
   void addMessage(String id,
       {required String authorId,
       required String authorName,
       required bool isAgent,
       required String body,
-      required bool isInternal,
-      required CommChannel channel}) {
+      CommChannel channel = CommChannel.inAppChat,
+      bool isInternal = false}) {
     final idx = state.indexWhere((t) => t.id == id);
     if (idx == -1) return;
     final ticket = state[idx];
